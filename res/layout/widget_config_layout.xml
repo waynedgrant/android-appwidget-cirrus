@@ -1,0 +1,395 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#f0ffff">
+
+	<LinearLayout 
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:focusable="true"
+	    android:focusableInTouchMode="true"
+	    android:orientation="vertical">
+	    
+	    <!-- Client Raw URL -->
+	    
+	    <TextView
+            android:id="@+id/clientRawUrlTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:background="#808080"
+            android:textColor="#e5e4e2"
+            android:paddingLeft="5dp"
+            android:text="@string/clientRawUrlTextView.text" />
+            
+	    <EditText
+	        android:id="@+id/clientRawUrlEditText"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:textAppearance="?android:attr/textAppearanceSmall"
+	        android:textColor="#463e3f"
+	        android:inputType="textUri"
+	        android:hint="@string/clientRawUrlEditText.hint"
+	        android:ems="10" />
+	    
+	    <!-- Station Name -->
+	    <TextView
+            android:id="@+id/stationNameTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:background="#808080"
+            android:textColor="#e5e4e2"
+            android:paddingLeft="5dp"
+            android:text="@string/stationNameTextView.text" />
+
+	    <CheckBox
+	        android:id="@+id/overrideStationNameCheckBox"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:text="@string/overrideStationNameCheckBox.text"
+	        android:checked="false"
+	        android:onClick="onClickOverrideStationName" />
+	    
+	    <EditText
+            android:id="@+id/stationNameEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="#463e3f"
+            android:inputType="text"
+            android:hint="@string/stationNameEditText.hint"
+            android:ems="10"
+            android:visibility="gone" />
+	    
+	    <!-- Weather Items -->
+	    
+	    <TextView
+            android:id="@+id/weatherItemsTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:background="#808080"
+            android:textColor="#e5e4e2"
+            android:paddingLeft="5dp"
+            android:text="@string/weatherItemsTextView.text" />
+        
+        <TextView
+            android:id="@+id/weatherItem1TextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="#463e3f"
+            android:paddingLeft="8dp"
+            android:text="@string/weatherItem1TextView.text" />      
+        
+        <Spinner
+            android:id="@+id/weatherItem1Spinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:spinnerMode="dialog"
+            android:prompt="@string/weatherItem1Spinner.text" />  
+    
+        <TextView
+            android:id="@+id/weatherItem2TextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="#463e3f"
+            android:paddingLeft="8dp"
+            android:text="@string/weatherItem2TextView.text" />        
+        
+        <Spinner
+            android:id="@+id/weatherItem2Spinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:spinnerMode="dialog"
+            android:prompt="@string/weatherItem2Spinner.text" /> 
+    
+        <TextView
+            android:id="@+id/weatherItem3TextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="#463e3f"            
+            android:paddingLeft="8dp"
+            android:text="@string/weatherItem3TextView.text" />        
+        
+        <Spinner
+            android:id="@+id/weatherItem3Spinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:spinnerMode="dialog"
+            android:prompt="@string/weatherItem3Spinner.text" /> 
+          
+        <TextView
+            android:id="@+id/weatherItem4TextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="#463e3f"            
+            android:paddingLeft="8dp"
+            android:text="@string/weatherItem4TextView.text" />
+                    
+        <Spinner
+            android:id="@+id/weatherItem4Spinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:spinnerMode="dialog"
+            android:prompt="@string/weatherItem4Spinner.text" /> 
+    
+        <TextView
+            android:id="@+id/weatherItem5TextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="#463e3f"            
+            android:paddingLeft="8dp"
+            android:text="@string/weatherItem5TextView.text" />        
+        
+        <Spinner
+            android:id="@+id/weatherItem5Spinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:spinnerMode="dialog"
+            android:prompt="@string/weatherItem5Spinner.text" /> 
+	    
+        <!-- Measurement Unit -->
+        
+	    <TextView
+	        android:id="@+id/measurementUnitsTextView"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:textAppearance="?android:attr/textAppearanceLarge"
+	        android:background="#808080"
+	        android:textColor="#e5e4e2"
+	        android:paddingLeft="5dp"
+	        android:text="@string/measurementUnitsTextView.text" />
+	
+	    <TextView
+	        android:id="@+id/temperatureUnitTextView"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="#463e3f"	        
+	        android:paddingLeft="8dp"
+	        android:text="@string/temperatureUnitTextView.text" />
+	
+	    <Spinner
+	        android:id="@+id/temperatureUnitSpinner"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:spinnerMode="dialog"
+	        android:prompt="@string/temperatureUnitSpinner.text" />
+	    
+	    <TextView
+	        android:id="@+id/pressureUnitTextView"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="#463e3f"	        
+	        android:paddingLeft="8dp"
+	        android:text="@string/pressureUnitTextView.text" />
+	    
+	    <Spinner
+	        android:id="@+id/pressureUnitSpinner"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:spinnerMode="dialog"
+	        android:prompt="@string/pressureUnitSpinner.text" />
+	    
+	    <TextView
+	        android:id="@+id/windSpeedUnitTextView"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="#463e3f"	        
+	        android:paddingLeft="8dp"
+	        android:text="@string/windSpeedUnitTextView.text" />    
+	    
+	    <Spinner
+	        android:id="@+id/windSpeedUnitSpinner"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:spinnerMode="dialog"
+	        android:prompt="@string/windSpeedUnitSpinner.text" />
+	
+	    <TextView
+	        android:id="@+id/windDirectionUnitTextView"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="#463e3f"	        
+	        android:paddingLeft="8dp"
+	        android:text="@string/windDirectionUnitTextView.text" />    
+	    
+	    <Spinner
+	        android:id="@+id/windDirectionUnitSpinner"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:spinnerMode="dialog"
+	        android:prompt="@string/windDirectionUnitSpinner.text" />
+	
+	    <TextView
+	        android:id="@+id/rainfallUnitTextView"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="#463e3f"	        
+	        android:paddingLeft="8dp"
+	        android:text="@string/rainfallUnitTextView.text" />
+	    
+	    <Spinner
+	        android:id="@+id/rainfallUnitSpinner"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:spinnerMode="dialog"
+	        android:prompt="@string/rainfallUnitSpinner.text" />
+	    
+	    <!-- Date/Time Format -->
+	    
+	    <TextView
+            android:id="@+id/dateTimeDisplayTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:background="#808080"
+            android:textColor="#e5e4e2"
+            android:paddingLeft="5dp"
+            android:text="@string/dateTimeDisplayTextView.text" />
+	    
+        <CheckBox
+            android:id="@+id/displayDateCheckBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/displayDateCheckBox.text"
+            android:checked="false"
+            android:onClick="onClickDisplayDate" />	    
+	    
+        <TextView
+            android:id="@+id/dateFormatTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="#463e3f"
+            android:paddingLeft="8dp"
+            android:text="@string/dateFormatTextView.text"
+            android:visibility="gone" />          
+        
+	    <Spinner
+            android:id="@+id/dateFormatSpinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:spinnerMode="dialog"
+            android:prompt="@string/dateFormatSpinner.text"
+            android:visibility="gone" />
+	    
+        <TextView
+            android:id="@+id/timeFormatTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="#463e3f"
+            android:paddingLeft="8dp"
+            android:text="@string/timeFormatTextView.text" />   	    
+	    
+	    <Spinner
+            android:id="@+id/timeFormatSpinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:spinnerMode="dialog"
+            android:prompt="@string/timeFormatSpinner.text" />
+	    
+	    <!-- Appearance -->
+        
+        <TextView
+            android:id="@+id/appearanceTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:background="#808080"
+            android:textColor="#e5e4e2"
+            android:paddingLeft="5dp"
+            android:text="@string/appearanceTextView.text" />
+        
+        <CheckBox
+            android:id="@+id/transparentCheckBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/transparentCheckBox.text"
+            android:checked="false" />
+        
+        <!-- Weather Update -->
+        
+        <TextView
+            android:id="@+id/weatherUpdateTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:background="#808080"
+            android:textColor="#e5e4e2"
+            android:paddingLeft="5dp"
+            android:text="@string/weatherUpdateTextView.text" />
+            
+        <TextView
+            android:id="@+id/connectionTimeoutTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="#463e3f"         
+            android:paddingLeft="8dp"
+            android:text="@string/connectionTimeoutTextView.text" />
+        
+        <Spinner
+            android:id="@+id/connectionTimeoutSpinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:spinnerMode="dialog"
+            android:prompt="@string/connectionTimeoutSpinner.text" />   
+            
+        <TextView
+            android:id="@+id/readTimeoutTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="#463e3f"         
+            android:paddingLeft="8dp"
+            android:text="@string/readTimeoutTextView.text" />
+        
+        <Spinner
+            android:id="@+id/readTimeoutSpinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:spinnerMode="dialog"
+            android:prompt="@string/readTimeoutSpinner.text" />           
+	    
+        <!-- Buttons -->
+        
+	    <LinearLayout
+	        android:layout_width="match_parent"
+	        android:layout_height="match_parent"
+	        android:orientation="horizontal">        
+	        
+		    <Button
+		        android:id="@+id/okButton"
+		        android:layout_width="0dp"
+		        android:layout_weight="1"
+		        android:layout_height="wrap_content"
+		        android:onClick="onClickOk"
+		        android:text="@string/okButton.text" />
+		    
+	        <Button
+	            android:id="@+id/aboutButton"
+	            android:layout_width="0dp"
+	            android:layout_weight="1"
+	            android:layout_height="wrap_content"
+	            android:onClick="onClickAbout"
+	            android:text="@string/aboutButton.text" />
+	        
+	    </LinearLayout>
+	        
+	</LinearLayout>
+
+</ScrollView>
