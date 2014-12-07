@@ -34,7 +34,7 @@ On adding the Cirrus widget its Settings page will be displayed for initial conf
 
 ### Settings
 
-* **Client Raw URL** - WD Live client raw url minus the 'clientraw.txt' suffix. e.g. http://www.waynedgrant.com/weather/meteohub
+* **Client Raw URL** - WD Live client raw url minus the 'clientraw.txt' suffix. e.g. http://www.waynedgrant.com/weather/meteohub/clientraw.txt
 * **Station Name** - Optionally overwrite the displayed weather station name fetched from WD Live
 * **Weather Items** - Configure five weather items to display on Widget
 * **Meaurement Units** - Measurement units (see below)
@@ -50,8 +50,8 @@ Station Name, Outdoor Temperature and Last Update Time are always displayed on t
 
 * Touch the spanner icon to update the widget's settings
 * If displayed touch the warning icon to see details of any connection issues
-* Touch anywhere else to have the widget update its displayed values from the configured Client Raw URL
-* Otherwise the widget will update its displayed values every 30 minutes
+* Touch anywhere else on the widget and it will update to display the latest data from the configured Client Raw URL
+* Otherwise the widget will update to displayed teh latest data every 30 minutes
 
 ## Weather Items
 
