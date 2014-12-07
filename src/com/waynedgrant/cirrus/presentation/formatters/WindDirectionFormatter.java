@@ -27,7 +27,7 @@ public class WindDirectionFormatter
         {
             if (unit == COMPASS_DEGREES)
             {
-                formatted = String.format(Locale.US, "%1d�", windDirection.getCompassDegrees());
+                formatted = String.format(Locale.US, "%1d°", windDirection.getCompassDegrees());
             }
             else
             {
@@ -38,7 +38,7 @@ public class WindDirectionFormatter
         {
             if (unit == WindDirectionUnit.COMPASS_DEGREES)
             {
-                formatted = "---�";
+                formatted = "---°";
             }
             else
             {

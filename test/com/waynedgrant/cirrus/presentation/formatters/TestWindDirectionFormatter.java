@@ -16,7 +16,7 @@ public class TestWindDirectionFormatter
     public void GIVEN_null_wind_direction_WHEN_compass_degrees_formatting_requested_THEN_returns_blank_compass_degrees_value()
     {
         testee = new WindDirectionFormatter(null);
-        assertEquals("---¡", testee.format(WindDirectionUnit.COMPASS_DEGREES));
+        assertEquals("---Â°", testee.format(WindDirectionUnit.COMPASS_DEGREES));
     }
     
     @Test
@@ -30,10 +30,10 @@ public class TestWindDirectionFormatter
     public void GIVEN_non_null_wind_direction_WHEN_compass_degrees_formatting_requested_THEN_returns_compass_degrees_value()
     {
         testee = new WindDirectionFormatter(new WindDirection(0));
-        assertEquals("0¡", testee.format(WindDirectionUnit.COMPASS_DEGREES));
+        assertEquals("0Â°", testee.format(WindDirectionUnit.COMPASS_DEGREES));
         
         testee = new WindDirectionFormatter(new WindDirection(338));
-        assertEquals("338¡", testee.format(WindDirectionUnit.COMPASS_DEGREES));
+        assertEquals("338Â°", testee.format(WindDirectionUnit.COMPASS_DEGREES));
     }
     
     @Test

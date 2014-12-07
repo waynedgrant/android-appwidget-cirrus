@@ -18,45 +18,45 @@ public class TestTemperatureFormatter
     public void GIVEN_null_temperature_WHEN_celsius_formatting_requested_THEN_returns_blank_celsius_value()
     {
         testee = new TemperatureFormatter(null);
-        assertEquals("--.-좧", testee.format(TemperatureUnit.CELSIUS));
+        assertEquals("--.-째C", testee.format(TemperatureUnit.CELSIUS));
     }
     
     @Test
     public void GIVEN_null_temperature_WHEN_fahrenheit_formatting_requested_THEN_returns_blank_fahrenheit_value()
     {
         testee = new TemperatureFormatter(null);
-        assertEquals("--.-좫", testee.format(TemperatureUnit.FAHRENHEIT));
+        assertEquals("--.-째F", testee.format(TemperatureUnit.FAHRENHEIT));
     }
     
     @Test
     public void GIVEN_non_null_temperature_WHEN_celsius_formatting_requested_THEN_returns_celsius_value_to_one_digit()
     {
         testee = new TemperatureFormatter(new Temperature(new BigDecimal("-15.66")));
-        assertEquals("-15.7좧", testee.format(TemperatureUnit.CELSIUS));
+        assertEquals("-15.7째C", testee.format(TemperatureUnit.CELSIUS));
         
         testee = new TemperatureFormatter(new Temperature(new BigDecimal("0")));
-        assertEquals("0.0좧", testee.format(TemperatureUnit.CELSIUS));
+        assertEquals("0.0째C", testee.format(TemperatureUnit.CELSIUS));
         
         testee = new TemperatureFormatter(new Temperature(new BigDecimal("-0.01")));
-        assertEquals("0.0좧", testee.format(TemperatureUnit.CELSIUS));
+        assertEquals("0.0째C", testee.format(TemperatureUnit.CELSIUS));
         
         testee = new TemperatureFormatter(new Temperature(new BigDecimal("15.65")));
-        assertEquals("15.6좧", testee.format(TemperatureUnit.CELSIUS));
+        assertEquals("15.6째C", testee.format(TemperatureUnit.CELSIUS));
     }
     
     @Test
     public void GIVEN_non_null_temperature_WHEN_fahrenheit_formatting_requested_THEN_returns_fahrenheit_value_to_one_digit()
     {
-        testee = new TemperatureFormatter(new Temperature(new BigDecimal("-9.072"))); // == 15.6704좫 (round up)
-        assertEquals("15.7좫", testee.format(TemperatureUnit.FAHRENHEIT));
+        testee = new TemperatureFormatter(new Temperature(new BigDecimal("-9.072"))); // == 15.6704째F (round up)
+        assertEquals("15.7째F", testee.format(TemperatureUnit.FAHRENHEIT));
         
-        testee = new TemperatureFormatter(new Temperature(new BigDecimal("0"))); // == 32좫 (zero)
-        assertEquals("32.0좫", testee.format(TemperatureUnit.FAHRENHEIT));
+        testee = new TemperatureFormatter(new Temperature(new BigDecimal("0"))); // == 32째F (zero)
+        assertEquals("32.0째F", testee.format(TemperatureUnit.FAHRENHEIT));
         
-        testee = new TemperatureFormatter(new Temperature(new BigDecimal("-17.78"))); // == -0.0004좫 (close to zero)
-        assertEquals("0.0좫", testee.format(TemperatureUnit.FAHRENHEIT));
+        testee = new TemperatureFormatter(new Temperature(new BigDecimal("-17.78"))); // == -0.0004째F (close to zero)
+        assertEquals("0.0째F", testee.format(TemperatureUnit.FAHRENHEIT));
         
-        testee = new TemperatureFormatter(new Temperature(new BigDecimal("-25.12"))); // == -13.216좫 (round down)
-        assertEquals("-13.2좫", testee.format(TemperatureUnit.FAHRENHEIT));
+        testee = new TemperatureFormatter(new Temperature(new BigDecimal("-25.12"))); // == -13.216째F (round down)
+        assertEquals("-13.2째F", testee.format(TemperatureUnit.FAHRENHEIT));
     }
 }

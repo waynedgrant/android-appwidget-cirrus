@@ -39,7 +39,7 @@ public class TestWeatherItemFormatter
     {
         FormattedWeatherItem formattedWeatherItem = testee.format(WeatherItem.APPARENT_TEMPERATURE);
         assertEquals("apparent", formattedWeatherItem.getLabel());
-        assertEquals("-15.6좧", formattedWeatherItem.getValue());
+        assertEquals("-15.6째C", formattedWeatherItem.getValue());
     }
     
     @Test
@@ -47,7 +47,7 @@ public class TestWeatherItemFormatter
     {
         FormattedWeatherItem formattedWeatherItem = testee.format(WeatherItem.AVERAGE_WIND);
         assertEquals("wind", formattedWeatherItem.getLabel());
-        assertEquals("10.5 kts 180�", formattedWeatherItem.getValue());
+        assertEquals("10.5 kts 180째", formattedWeatherItem.getValue());
     }
 
     @Test
@@ -71,7 +71,7 @@ public class TestWeatherItemFormatter
     {
         FormattedWeatherItem formattedWeatherItem = testee.format(WeatherItem.DEW_POINT);
         assertEquals("dew point", formattedWeatherItem.getLabel());
-        assertEquals("16.3좧", formattedWeatherItem.getValue());
+        assertEquals("16.3째C", formattedWeatherItem.getValue());
     }
     
     @Test
@@ -95,7 +95,7 @@ public class TestWeatherItemFormatter
     {
         FormattedWeatherItem formattedWeatherItem = testee.format(WeatherItem.HEAT_INDEX);
         assertEquals("heat index", formattedWeatherItem.getLabel());
-        assertEquals("19.4좧", formattedWeatherItem.getValue());
+        assertEquals("19.4째C", formattedWeatherItem.getValue());
     }
 
     @Test
@@ -103,7 +103,7 @@ public class TestWeatherItemFormatter
     {
         FormattedWeatherItem formattedWeatherItem = testee.format(WeatherItem.HUMIDEX);
         assertEquals("humidex", formattedWeatherItem.getLabel());
-        assertEquals("23.7좧", formattedWeatherItem.getValue());
+        assertEquals("23.7째C", formattedWeatherItem.getValue());
     }
 
     @Test
@@ -119,7 +119,7 @@ public class TestWeatherItemFormatter
     {
         FormattedWeatherItem formattedWeatherItem = testee.format(WeatherItem.INDOOR_CONDITIONS);
         assertEquals("indoor", formattedWeatherItem.getLabel());
-        assertEquals("25.4좧, 29%", formattedWeatherItem.getValue());
+        assertEquals("25.4째C, 29%", formattedWeatherItem.getValue());
     }
 
     @Test
@@ -159,6 +159,6 @@ public class TestWeatherItemFormatter
     {
         FormattedWeatherItem formattedWeatherItem = testee.format(WeatherItem.WIND_CHILL);
         assertEquals("wind chill", formattedWeatherItem.getLabel());
-        assertEquals("24.7좧", formattedWeatherItem.getValue());
+        assertEquals("24.7째C", formattedWeatherItem.getValue());
     }
 }
