@@ -155,7 +155,7 @@ public class Preferences
     
     public WindSpeedUnit getWindSpeedUnit(int appWidgetId)
     {
-        return WindSpeedUnit.valueOf(getPreference(WIND_SPEED_UNIT, appWidgetId, WindSpeedUnit.KNOTS.name()));
+        return WindSpeedUnit.valueOf(getPreference(WIND_SPEED_UNIT, appWidgetId, WindSpeedUnit.KILOMETRES_PER_HOUR.name()));
     }
     
     public void setWindSpeedUnit(int appWidgetId, WindSpeedUnit value)
@@ -165,7 +165,7 @@ public class Preferences
     
     public WindDirectionUnit getWindDirectionUnit(int appWidgetId)
     {
-        return WindDirectionUnit.valueOf(getPreference(WIND_DIRECTION_UNIT, appWidgetId, WindDirectionUnit.COMPASS_DEGREES.name()));
+        return WindDirectionUnit.valueOf(getPreference(WIND_DIRECTION_UNIT, appWidgetId, WindDirectionUnit.CARDINAL_DIRECTION.name()));
     }
     
     public void setWindDirectionUnit(int appWidgetId, WindDirectionUnit value)

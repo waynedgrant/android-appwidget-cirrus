@@ -16,6 +16,7 @@ import android.view.View;
 import android.widget.RemoteViews;
 
 import com.waynedgrant.cirrus.clientraw.ClientRaw;
+import com.waynedgrant.cirrus.clientraw.ClientRawCache;
 import com.waynedgrant.cirrus.clientraw.ClientRawRequest;
 import com.waynedgrant.cirrus.clientraw.ClientRawResponse;
 import com.waynedgrant.cirrus.clientraw.ClientRawUrl;
@@ -50,7 +51,8 @@ public class UpdateWidgetService extends Service
 
         if (appWidgetIds != null)
         {
-            Preferences preferences = new Preferences(getApplicationContext());
+            Context context = getApplicationContext();
+            Preferences preferences = new Preferences(context);
             
             for (int appWidgetId : appWidgetIds)
             {
@@ -58,27 +60,40 @@ public class UpdateWidgetService extends Service
                 
                 if (configured)
                 {
-                    String clientRawUrl = preferences.getClientRawUrl(appWidgetId);
-                 
-                    int connectTimeoutMs = preferences.getConnectionTimeout(appWidgetId).getTimeoutMsecs();
-                    int readTimoutMs = preferences.getReadTimeout(appWidgetId).getTimeoutMsecs();
+                    boolean fetchFreshClientRaw = intent.getBooleanExtra(WidgetProvider.FETCH_FRESH_CLIENT_RAW, true);
                     
-                    RetrieveClientRawTask retrieveClientRawTask = new RetrieveClientRawTask(this, connectTimeoutMs, readTimoutMs);
-                    retrieveClientRawTask.execute(new ClientRawRequest(appWidgetId, new ClientRawUrl(clientRawUrl)));
-                    
-                    RemoteViews remoteViews = getRemoteViews();
-                    
-                    setWidgetStatusToDisplayRefreshing(remoteViews);
-                    setWidgetBackground(appWidgetId, remoteViews, preferences);
-                    setWidgetClickRefreshIntent(appWidgetId, remoteViews);
-                    setWidgetClickConfigIntent(appWidgetId, remoteViews);
-                    
-                    pushUpdatesToWidget(appWidgetId, remoteViews);
+                    if (!fetchFreshClientRaw && ClientRawCache.isCached(appWidgetId))
+                    {
+                        updateDisplayWithCachedClientRaw(appWidgetId, preferences);
+                    }
+                    else
+                    {
+                        requestUpdatedClientRaw(appWidgetId, preferences);
+                    }
                 }
             }
         }
         
         return super.onStartCommand(intent, flags, startId);
+    }
+
+    private void requestUpdatedClientRaw(int appWidgetId, Preferences preferences)
+    {
+        String clientRawUrl = preferences.getClientRawUrl(appWidgetId);
+        int connectTimeoutMs = preferences.getConnectionTimeout(appWidgetId).getTimeoutMsecs();
+        int readTimoutMs = preferences.getReadTimeout(appWidgetId).getTimeoutMsecs();
+        
+        RetrieveClientRawTask retrieveClientRawTask = new RetrieveClientRawTask(this, connectTimeoutMs, readTimoutMs);
+        retrieveClientRawTask.execute(new ClientRawRequest(appWidgetId, new ClientRawUrl(clientRawUrl)));
+        
+        RemoteViews remoteViews = getRemoteViews();
+        
+        setWidgetStatusToDisplayRefreshing(remoteViews);
+        setWidgetBackground(appWidgetId, remoteViews, preferences);
+        setWidgetClickRefreshIntent(appWidgetId, remoteViews);
+        setWidgetClickConfigIntent(appWidgetId, remoteViews);
+        
+        pushUpdatesToWidget(appWidgetId, remoteViews);
     }
     
     @Override
@@ -87,28 +102,44 @@ public class UpdateWidgetService extends Service
         return null;
     }
     
+    private void updateDisplayWithCachedClientRaw(int appWidgetId, Preferences preferences)
+    {
+        RemoteViews remoteViews = getRemoteViews();
+        
+        ClientRaw clientRaw = ClientRawCache.fetch(appWidgetId);
+        
+        setWidgetStationNameDisplay(appWidgetId, remoteViews, preferences, clientRaw);
+        setWidgetTemperatureDisplay(appWidgetId, remoteViews, preferences, clientRaw);
+        setWidgetWeatherItemsDisplay(appWidgetId, remoteViews, preferences, clientRaw);
+        setWidgetWhenRefreshedDisplay(appWidgetId, remoteViews, preferences, clientRaw);
+        
+        remoteViews.setViewVisibility(R.id.statusImage, View.INVISIBLE);
+        
+        setWidgetBackground(appWidgetId, remoteViews, preferences);
+        setWidgetClickRefreshIntent(appWidgetId, remoteViews);
+        setWidgetClickConfigIntent(appWidgetId, remoteViews);
+        
+        pushUpdatesToWidget(appWidgetId, remoteViews);
+    }
+    
     public void handleClientRawResponses(List<ClientRawResponse> responses)
     {
-        Context context = getApplicationContext();
-        
-        AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
-        
+        Preferences preferences = new Preferences(getApplicationContext());
+
         for (ClientRawResponse response : responses)
         {
-            handleClientRawResponse(context, appWidgetManager, response);
+            handleClientRawResponse(response, preferences);
         }
         
         stopSelf();
     }
 
-    private void handleClientRawResponse(Context context, AppWidgetManager appWidgetManager, ClientRawResponse response)
+    private void handleClientRawResponse(ClientRawResponse response, Preferences preferences)
     {
-        ClientRaw clientRaw = response.getClientRaw();
-        
         int appWidgetId = response.getAppWidgetId();
         RemoteViews remoteViews = getRemoteViews();
-
-        Preferences preferences = new Preferences(context);
+        
+        ClientRaw clientRaw = response.getClientRaw();
         
         if (clientRaw == null)
         {
@@ -117,6 +148,8 @@ public class UpdateWidgetService extends Service
         }
         else
         {
+            ClientRawCache.update(appWidgetId, clientRaw);
+            
             setWidgetStationNameDisplay(appWidgetId, remoteViews, preferences, clientRaw);
             setWidgetTemperatureDisplay(appWidgetId, remoteViews, preferences, clientRaw);
             setWidgetWeatherItemsDisplay(appWidgetId, remoteViews, preferences, clientRaw);
@@ -139,15 +172,11 @@ public class UpdateWidgetService extends Service
     
     private void setWidgetBackground(int appWidgetId, RemoteViews remoteViews, Preferences preferences)
     {
-        int drawable;
+        int drawable = R.drawable.widget_shape_opaque;
         
         if (preferences.isTransparent(appWidgetId))
         {
             drawable = R.drawable.widget_shape_transparent;
-        }
-        else
-        {
-            drawable = R.drawable.widget_shape_opaque;
         }
         
         remoteViews.setInt(R.id.mainWidgetLayout, "setBackgroundResource", drawable);

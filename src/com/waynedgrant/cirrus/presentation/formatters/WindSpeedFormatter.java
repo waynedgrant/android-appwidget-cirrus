@@ -48,7 +48,7 @@ public class WindSpeedFormatter
                 }
                 else if (unit == KILOMETRES_PER_HOUR)
                 {
-                    formatString = "%1.1f kph";
+                    formatString = "%1.1f km/h";
                 }
                 else if (unit == MILES_PER_HOUR)
                 {
@@ -70,7 +70,7 @@ public class WindSpeedFormatter
             }
             else if (unit == KILOMETRES_PER_HOUR)
             {
-                formatted = "--.- kph";
+                formatted = "--.- km/h";
             }
             else if (unit == MILES_PER_HOUR)
             {

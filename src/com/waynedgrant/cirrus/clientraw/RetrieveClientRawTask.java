@@ -72,7 +72,8 @@ public class RetrieveClientRawTask extends AsyncTask<ClientRawRequest, Void, Lis
 
     private ClientRaw whileClientRawEmptyRetryFetch(ClientRawUrl clientRawUrl, ClientRaw clientRaw) throws IOException
     {
-        // clientraw.txt may have been being written to on server when we read, try again
+        /* clientraw.txt may have been being written to on the server-side when we read.
+           This results in an empty file being returned in which case we try fetching again */
         int fetchClientRawAttempts = 1;
         
         while (clientRaw.isEmpty() && fetchClientRawAttempts <= MAX_FETCH_CLIENT_RAW_ATTEMPTS) 

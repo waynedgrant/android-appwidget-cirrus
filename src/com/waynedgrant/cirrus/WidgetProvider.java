@@ -11,12 +11,14 @@ import android.content.Context;
 import android.content.Intent;
 import android.widget.Toast;
 
+import com.waynedgrant.cirrus.clientraw.ClientRawCache;
 import com.waynedgrant.cirrus.preferences.Preferences;
 
 public class WidgetProvider extends AppWidgetProvider
 {
     public static final String ERROR_ACTION = "com.waynedgrant.cirrus.error";
     public static final String ERROR_MESSAGE_EXTRA = "com.waynedgrant.cirrus.errorMessage";
+    public static final String FETCH_FRESH_CLIENT_RAW = "com.waynedgrant.cirrus.fetchFreshClientRaw";
     
     @Override
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds)
@@ -29,6 +31,7 @@ public class WidgetProvider extends AppWidgetProvider
     {
         Intent intent = new Intent(context.getApplicationContext(), UpdateWidgetService.class);
         intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, appWidgetIds);
+        intent.putExtra(FETCH_FRESH_CLIENT_RAW, true);
 
         context.startService(intent);
     }
@@ -56,7 +59,7 @@ public class WidgetProvider extends AppWidgetProvider
     public void onDeleted(Context context, int[] appWidgetIds)
     {
         deletePreferences(context, appWidgetIds);
-        
+        clearClientRawCache(appWidgetIds);
         super.onDeleted(context, appWidgetIds);
     }
     
@@ -70,5 +73,13 @@ public class WidgetProvider extends AppWidgetProvider
         }
        
         preferences.commit();
+    }
+    
+    private void clearClientRawCache(int[] appWidgetIds)
+    {       
+        for (int appWidgetId : appWidgetIds)
+        {
+            ClientRawCache.remove(appWidgetId);
+        }
     }
 }

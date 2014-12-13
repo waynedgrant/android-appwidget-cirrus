@@ -31,7 +31,7 @@ public class TestWindSpeedFormatter
     public void GIVEN_null_wind_speed_WHEN_kilometres_per_hour_formatting_requested_THEN_returns_blank_kilometres_per_hour_value()
     {
         testee = new WindSpeedFormatter(null);
-        assertEquals("--.- kph", testee.format(WindSpeedUnit.KILOMETRES_PER_HOUR));
+        assertEquals("--.- km/h", testee.format(WindSpeedUnit.KILOMETRES_PER_HOUR));
     }
     
     @Test
@@ -83,17 +83,17 @@ public class TestWindSpeedFormatter
     @Test
     public void GIVEN_non_null_wind_speed_WHEN_kilometres_per_hour_formatting_requested_THEN_returns_kilometres_per_hour_value_to_one_digit()
     {
-        testee = new WindSpeedFormatter(new WindSpeed(new BigDecimal("1"))); // == 1.852 kph (round up)
-        assertEquals("1.9 kph", testee.format(WindSpeedUnit.KILOMETRES_PER_HOUR));
+        testee = new WindSpeedFormatter(new WindSpeed(new BigDecimal("1"))); // == 1.852 km/h (round up)
+        assertEquals("1.9 km/h", testee.format(WindSpeedUnit.KILOMETRES_PER_HOUR));
         
-        testee = new WindSpeedFormatter(new WindSpeed(new BigDecimal("0"))); // == 0 kph (zero)
-        assertEquals("0.0 kph", testee.format(WindSpeedUnit.KILOMETRES_PER_HOUR));
+        testee = new WindSpeedFormatter(new WindSpeed(new BigDecimal("0"))); // == 0 km/h (zero)
+        assertEquals("0.0 km/h", testee.format(WindSpeedUnit.KILOMETRES_PER_HOUR));
         
-        testee = new WindSpeedFormatter(new WindSpeed(new BigDecimal("0.01"))); // == 0.01852 kph (round to zero)
-        assertEquals("0.0 kph", testee.format(WindSpeedUnit.KILOMETRES_PER_HOUR));
+        testee = new WindSpeedFormatter(new WindSpeed(new BigDecimal("0.01"))); // == 0.01852 km/h (round to zero)
+        assertEquals("0.0 km/h", testee.format(WindSpeedUnit.KILOMETRES_PER_HOUR));
         
-        testee = new WindSpeedFormatter(new WindSpeed(new BigDecimal("0.5"))); // == 0.926 kph (round down)
-        assertEquals("0.9 kph", testee.format(WindSpeedUnit.KILOMETRES_PER_HOUR));
+        testee = new WindSpeedFormatter(new WindSpeed(new BigDecimal("0.5"))); // == 0.926 km/h (round down)
+        assertEquals("0.9 km/h", testee.format(WindSpeedUnit.KILOMETRES_PER_HOUR));
     }
     
     @Test

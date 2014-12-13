@@ -73,7 +73,7 @@ Station Name, Outdoor Temperature and Last Update Time are always displayed on t
 ### Wind Speed
 
 * Beaufort Scale (Bft)
-* Kilometres per Hour (kph)
+* Kilometres per Hour (km/h)
 * Knots (kts)
 * Metres per Second (m/s)
 * Miles per Hour (mph)

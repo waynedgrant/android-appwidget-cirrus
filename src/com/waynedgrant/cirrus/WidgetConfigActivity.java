@@ -23,6 +23,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.waynedgrant.cirrus.clientraw.ClientRawCache;
 import com.waynedgrant.cirrus.measures.WeatherItem;
 import com.waynedgrant.cirrus.preferences.Preferences;
 import com.waynedgrant.cirrus.presentation.formatters.DateFormat;
@@ -183,13 +184,21 @@ public class WidgetConfigActivity extends Activity
         }
         else
         {
+            Preferences preferences = new Preferences(getApplicationContext());
+            String oldClientRawUrl = preferences.getClientRawUrl(appWidgetId);
+            
             updatePreferences(context);
+            
+            String newClientRawUrl = preferences.getClientRawUrl(appWidgetId);
             
             setResult(RESULT_OK, resultValue);
             
             Intent updateServiceIntent = new Intent(context, UpdateWidgetService.class);
             updateServiceIntent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, new int[]{appWidgetId});
-    
+            
+            boolean fetchFreshClientRaw = !newClientRawUrl.equals(oldClientRawUrl) || !ClientRawCache.isCached(appWidgetId);
+            updateServiceIntent.putExtra(WidgetProvider.FETCH_FRESH_CLIENT_RAW, fetchFreshClientRaw);
+            
             context.startService(updateServiceIntent);
             
             finish();
