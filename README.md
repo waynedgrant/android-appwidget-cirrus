@@ -24,36 +24,53 @@ $ git clone https://github.com/waynedgrant/android-appwidget-cirrus.git
 
 * Install the Android Developer Tools (ADT)
 * Start the Eclipse ADT and import the cloned directory as an existing Android project
-* Run as an Android application to install to a chosen Android device connected your computer
+* Run as an Android application to install to a chosen Android device connected to your computer
 
 ## App Widget Help
 
 To add the widget locate 'Cirrus 2 x 2' in your device's Widget gallery. Add one widget per weather station you want to display readings from.
 
-On adding the Cirrus widget its Settings page will be displayed for initial configuration.
+On adding the Cirrus widget its Settings page will be automatically displayed for initial configuration.
 
 ### Settings
 
-* **Client Raw URL** - WD Live client raw url minus the 'clientraw.txt' suffix. e.g. http://www.waynedgrant.com/weather/meteohub/clientraw.txt
-* **Station Name** - Optionally overwrite the displayed weather station name fetched from WD Live
+* **Client Raw URL** - WD Live client raw url. e.g. http://www.waynedgrant.com/weather/meteohub/clientraw.txt
+* **Station Name** - Optionally overwrite the displayed 'Station Name' fetched from WD Live
 * **Weather Items** - Configure five weather items to display on Widget (see below)
 * **Meaurement Units** - Select displayed measurement units (see below)
-* **Date/Time Display** - Configure display format of Last Update Time
-* **Appearanace** - Transparency of widget
-* **Weather Update** - Configure update related network timeouts
+* **Date/Time Display** - Configure the display format of 'Last Update Time'
+* **Appearanace** - Configure transparency of widget
+* **Weather Update** - Configure update network related timeouts
 
-Touch **OK** at the bottom of the settings screen to save selections.
+Touch **OK** at the bottom of the settings screen to save Settings selections.
 
 ## Widget Controls
 
-Station Name, Outdoor Temperature and Last Update Time are always displayed on the widget along with the five Weather Items configured in Settings.
+'Station Name', 'Outdoor Temperature' and 'Last Update Time' are always displayed on the widget along with the five Weather Items configured in Settings.
 
 * Touch the spanner icon to update the widget's settings
-* If displayed touch the warning icon to see details of any connection issues
-* Touch anywhere else on the widget and it will update to display the latest data from the configured Client Raw URL
-* Otherwise the widget will update to displayed teh latest data every 30 minutes
+* If displayed touch the warning icon to see details of any current connection issues
+* Touch anywhere else on the widget and it will attempt to update and display the latest data from WD Live
+* Otherwise the widget will attempt to update and display the latest data from WD Live every 30 minutes
 
 ## Weather Items
+
+* Apparent Temperature
+* Average Wind
+* Blank
+* Daily Rainfall
+* Dew Point
+* Forecast
+* Gust
+* Heat Index
+* Humidex
+* Humidity
+* Indoor Conditions
+* Rainfall Rate
+* Solar
+* Surface Pressure
+* UV Index
+* Wind Chill
 
 ## Measurement Units
 
