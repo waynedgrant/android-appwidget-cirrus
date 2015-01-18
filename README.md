@@ -14,17 +14,13 @@ android-appwidget-cirrus supports the display of many different weather items an
 
 ![alt tag](res/drawable-nodpi/preview.png)
 
+## Requirements
+
+Android device running at least version 2.2 (Froyo)
+
 ## Installation
 
-* Clone the Java source from github:
-
-```
-$ git clone https://github.com/waynedgrant/android-appwidget-cirrus.git
-```
-
-* Install the Android Developer Tools (ADT)
-* Start the Eclipse ADT and import the cloned directory as an existing Android project
-* Run as an Android application to install to a chosen Android device connected to your computer
+Download [latest apk](https://github.com/waynedgrant/android-appwidget-cirrus/releases) on Android device and install 
 
 ## App Widget Help
 
