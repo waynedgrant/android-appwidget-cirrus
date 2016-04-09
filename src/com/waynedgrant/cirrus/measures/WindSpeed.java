@@ -10,23 +10,23 @@ import com.waynedgrant.cirrus.units.WindSpeedUnit;
 
 public class WindSpeed
 {
-	private BigDecimal knots;
-	private BigDecimal metresPerSecond;
-	private BigDecimal kilometresPerHour;
-	private BigDecimal milesPerHour;
-	private BigDecimal beaufortScale;
-	
-	public WindSpeed(BigDecimal knots)
-	{
-		this.knots = knots;
-		this.metresPerSecond = knots.multiply(new BigDecimal("0.514444"));
-		this.kilometresPerHour = knots.multiply(new BigDecimal("1.852"));
-		this.milesPerHour = knots.multiply(new BigDecimal("1.15078"));
-		this.beaufortScale = convertKnotsToBeaufortScale(knots);
-	}
-	
-	public BigDecimal getValue(WindSpeedUnit unit)
-	{
+    private BigDecimal knots;
+    private BigDecimal metresPerSecond;
+    private BigDecimal kilometresPerHour;
+    private BigDecimal milesPerHour;
+    private BigDecimal beaufortScale;
+    
+    public WindSpeed(BigDecimal knots)
+    {
+        this.knots = knots;
+        this.metresPerSecond = knots.multiply(new BigDecimal("0.514444"));
+        this.kilometresPerHour = knots.multiply(new BigDecimal("1.852"));
+        this.milesPerHour = knots.multiply(new BigDecimal("1.15078"));
+        this.beaufortScale = convertKnotsToBeaufortScale(knots);
+    }
+    
+    public BigDecimal getValue(WindSpeedUnit unit)
+    {
         BigDecimal value = null;
         
         switch (unit)
@@ -39,22 +39,22 @@ public class WindSpeed
         }
         
         return value;
-	}
-	
-	private BigDecimal convertKnotsToBeaufortScale(BigDecimal knots)
-	{
-	    int roundedKnots = knots.setScale(0, RoundingMode.HALF_UP).intValue();
-	    
-	    int beaufortScale = 0;
-	    
-	    if (roundedKnots >= 1 && roundedKnots <= 3)
-	    {
-	        beaufortScale = 1;
-	    }
-	    else if (roundedKnots >= 4 && roundedKnots <= 6)
-	    {
-	        beaufortScale = 2;
-	    }
+    }
+    
+    private BigDecimal convertKnotsToBeaufortScale(BigDecimal knots)
+    {
+        int roundedKnots = knots.setScale(0, RoundingMode.HALF_UP).intValue();
+        
+        int beaufortScale = 0;
+        
+        if (roundedKnots >= 1 && roundedKnots <= 3)
+        {
+            beaufortScale = 1;
+        }
+        else if (roundedKnots >= 4 && roundedKnots <= 6)
+        {
+            beaufortScale = 2;
+        }
         else if (roundedKnots >= 7 && roundedKnots <= 10)
         {
             beaufortScale = 3;
@@ -95,7 +95,7 @@ public class WindSpeed
         {
             beaufortScale = 12;
         }
-	    
-	    return new BigDecimal(beaufortScale);
-	}
+        
+        return new BigDecimal(beaufortScale);
+    }
 }

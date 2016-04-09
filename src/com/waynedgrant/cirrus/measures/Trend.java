@@ -5,7 +5,7 @@ package com.waynedgrant.cirrus.measures;
 
 public enum Trend
 {
-	RISING,
-	STEADY,
-	FALLING;
+    RISING,
+    STEADY,
+    FALLING;
 }

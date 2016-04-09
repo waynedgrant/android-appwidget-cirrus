@@ -11,15 +11,15 @@ import com.waynedgrant.cirrus.units.RainfallUnit;
 
 public class Rainfall
 {
-	private BigDecimal millimetres;
-	private BigDecimal inches;
-	
-	public Rainfall(BigDecimal millmetres)
-	{
-		this.millimetres = millmetres;
-		this.inches = millimetres.multiply(new BigDecimal("1").divide(new BigDecimal("25.4"), DECIMAL32));
-	}
-	
+    private BigDecimal millimetres;
+    private BigDecimal inches;
+    
+    public Rainfall(BigDecimal millmetres)
+    {
+        this.millimetres = millmetres;
+        this.inches = millimetres.multiply(new BigDecimal("1").divide(new BigDecimal("25.4"), DECIMAL32));
+    }
+    
     public BigDecimal getValue(RainfallUnit unit)
     {
         BigDecimal value = null;

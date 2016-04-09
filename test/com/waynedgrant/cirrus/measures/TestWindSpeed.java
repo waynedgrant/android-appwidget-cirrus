@@ -9,45 +9,45 @@ import com.waynedgrant.cirrus.units.WindSpeedUnit;
 
 public class TestWindSpeed
 {
-	private WindSpeed testee;
-	
-	@Test
-	public void GIVEN_populated_with_knots_WHEN_knots_requested_THEN_returns_correct_value()
-	{
-		testee = new WindSpeed(new BigDecimal("1.5"));
-		new BigDecimalEquals().assertEquals(new BigDecimal("1.5"), testee.getValue(WindSpeedUnit.KNOTS));
-	}
-	
-	@Test
-	public void GIVEN_populated_with_knots_WHEN_metres_per_second_requested_THEN_returns_correct_value()
-	{
-		testee = new WindSpeed(new BigDecimal("0"));
-		new BigDecimalEquals().assertEquals(new BigDecimal("0"), testee.getValue(WindSpeedUnit.METRES_PER_SECOND));
-		
-		testee = new WindSpeed(new BigDecimal("5"));
-		new BigDecimalEquals().assertEquals(new BigDecimal("2.57222"), testee.getValue(WindSpeedUnit.METRES_PER_SECOND));
-	}
-	
-	@Test
-	public void GIVEN_populated_with_knots_WHEN_get_kilometres_per_hour_requested_THEN_returns_correct_value()
-	{
-		testee = new WindSpeed(new BigDecimal("0"));
-		new BigDecimalEquals().assertEquals(new BigDecimal("0"), testee.getValue(WindSpeedUnit.KILOMETRES_PER_HOUR));
-		
-		testee = new WindSpeed(new BigDecimal("5"));
-		new BigDecimalEquals().assertEquals(new BigDecimal("9.26"), testee.getValue(WindSpeedUnit.KILOMETRES_PER_HOUR));
-	}
-	
-	@Test
-	public void GIVEN_populated_with_knots_WHEN_get_miles_per_hour_requested_THEN_returns_correct_value()
-	{
-		testee = new WindSpeed(new BigDecimal("0"));
-		new BigDecimalEquals().assertEquals(new BigDecimal("0"), testee.getValue(WindSpeedUnit.MILES_PER_HOUR));
-		
-		testee = new WindSpeed(new BigDecimal("5"));
-		new BigDecimalEquals().assertEquals(new BigDecimal("5.7539"), testee.getValue(WindSpeedUnit.MILES_PER_HOUR));
-	}
-	
+    private WindSpeed testee;
+    
+    @Test
+    public void GIVEN_populated_with_knots_WHEN_knots_requested_THEN_returns_correct_value()
+    {
+        testee = new WindSpeed(new BigDecimal("1.5"));
+        new BigDecimalEquals().assertEquals(new BigDecimal("1.5"), testee.getValue(WindSpeedUnit.KNOTS));
+    }
+    
+    @Test
+    public void GIVEN_populated_with_knots_WHEN_metres_per_second_requested_THEN_returns_correct_value()
+    {
+        testee = new WindSpeed(new BigDecimal("0"));
+        new BigDecimalEquals().assertEquals(new BigDecimal("0"), testee.getValue(WindSpeedUnit.METRES_PER_SECOND));
+        
+        testee = new WindSpeed(new BigDecimal("5"));
+        new BigDecimalEquals().assertEquals(new BigDecimal("2.57222"), testee.getValue(WindSpeedUnit.METRES_PER_SECOND));
+    }
+    
+    @Test
+    public void GIVEN_populated_with_knots_WHEN_get_kilometres_per_hour_requested_THEN_returns_correct_value()
+    {
+        testee = new WindSpeed(new BigDecimal("0"));
+        new BigDecimalEquals().assertEquals(new BigDecimal("0"), testee.getValue(WindSpeedUnit.KILOMETRES_PER_HOUR));
+        
+        testee = new WindSpeed(new BigDecimal("5"));
+        new BigDecimalEquals().assertEquals(new BigDecimal("9.26"), testee.getValue(WindSpeedUnit.KILOMETRES_PER_HOUR));
+    }
+    
+    @Test
+    public void GIVEN_populated_with_knots_WHEN_get_miles_per_hour_requested_THEN_returns_correct_value()
+    {
+        testee = new WindSpeed(new BigDecimal("0"));
+        new BigDecimalEquals().assertEquals(new BigDecimal("0"), testee.getValue(WindSpeedUnit.MILES_PER_HOUR));
+        
+        testee = new WindSpeed(new BigDecimal("5"));
+        new BigDecimalEquals().assertEquals(new BigDecimal("5.7539"), testee.getValue(WindSpeedUnit.MILES_PER_HOUR));
+    }
+    
     @Test
     public void GIVEN_populated_with_knots_between_0_and_0_point_4_WHEN_get_beaufort_scale_requested_THEN_returns_0()
     {
