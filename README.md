@@ -20,7 +20,7 @@ Android device running at least version 2.2 (Froyo)
 
 ## Installation
 
-Download [latest apk](https://github.com/waynedgrant/android-appwidget-cirrus/releases) on Android device and install 
+Download [latest apk](https://github.com/waynedgrant/android-appwidget-cirrus/releases) on Android device and install
 
 ## App Widget Help
 
@@ -30,7 +30,7 @@ On adding the Cirrus widget its Settings page will be automatically displayed fo
 
 ### Settings
 
-* **Client Raw URL** - WD Live client raw url. e.g. http://www.waynedgrant.com/weather/meteohub/clientraw.txt
+* **Client Raw URL** - WD Live client raw url. e.g. http://waynedgrant.com/weather/meteohub/clientraw.txt
 * **Station Name** - Optionally overwrite the displayed 'Station Name' fetched from WD Live
 * **Weather Items** - Configure five weather items to display on Widget (see below)
 * **Meaurement Units** - Select displayed measurement units (see below)
