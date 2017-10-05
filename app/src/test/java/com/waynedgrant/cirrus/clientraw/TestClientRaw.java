@@ -1,17 +1,5 @@
 package com.waynedgrant.cirrus.clientraw;
 
-import static junit.framework.Assert.assertEquals;
-import static junit.framework.Assert.assertFalse;
-import static junit.framework.Assert.assertNull;
-import static junit.framework.Assert.assertTrue;
-
-import java.io.ByteArrayInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.math.BigDecimal;
-
-import org.junit.Test;
-
 import com.waynedgrant.cirrus.BigDecimalEquals;
 import com.waynedgrant.cirrus.measures.Conditions;
 import com.waynedgrant.cirrus.measures.Trend;
@@ -19,6 +7,18 @@ import com.waynedgrant.cirrus.units.PressureUnit;
 import com.waynedgrant.cirrus.units.RainfallUnit;
 import com.waynedgrant.cirrus.units.TemperatureUnit;
 import com.waynedgrant.cirrus.units.WindSpeedUnit;
+
+import org.junit.Test;
+
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.math.BigDecimal;
+
+import static junit.framework.Assert.assertEquals;
+import static junit.framework.Assert.assertFalse;
+import static junit.framework.Assert.assertNull;
+import static junit.framework.Assert.assertTrue;
 
 public class TestClientRaw
 {

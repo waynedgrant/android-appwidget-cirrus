@@ -1,18 +1,15 @@
 package com.waynedgrant.cirrus.presentation.colorizers;
 
-import static junit.framework.Assert.assertEquals;
-
-import java.io.IOException;
+import com.waynedgrant.cirrus.ClientRawGenerator;
+import com.waynedgrant.cirrus.clientraw.ClientRaw;
+import com.waynedgrant.cirrus.measures.WeatherItem;
 
 import org.junit.Before;
 import org.junit.Test;
 
-import com.waynedgrant.cirrus.ClientRawGenerator;
-import com.waynedgrant.cirrus.clientraw.ClientRaw;
-import com.waynedgrant.cirrus.measures.WeatherItem;
-import com.waynedgrant.cirrus.presentation.colorizers.TemperatureColorizer;
-import com.waynedgrant.cirrus.presentation.colorizers.UvIndexColorizer;
-import com.waynedgrant.cirrus.presentation.colorizers.WeatherItemColorizer;
+import java.io.IOException;
+
+import static junit.framework.Assert.assertEquals;
 
 public class TestWeatherItemColorizer
 {

@@ -3,9 +3,9 @@
 
 package com.waynedgrant.cirrus.presentation.formatters;
 
-import static com.waynedgrant.cirrus.presentation.formatters.TimeFormat.HOUR_24;
-
 import java.util.Locale;
+
+import static com.waynedgrant.cirrus.presentation.formatters.TimeFormat.HOUR_24;
 
 public class TimeFormatter
 {

@@ -1,14 +1,13 @@
 package com.waynedgrant.cirrus.presentation.formatters;
 
-import static junit.framework.Assert.assertEquals;
-
-import java.math.BigDecimal;
+import com.waynedgrant.cirrus.measures.Pressure;
+import com.waynedgrant.cirrus.units.PressureUnit;
 
 import org.junit.Test;
 
-import com.waynedgrant.cirrus.measures.Pressure;
-import com.waynedgrant.cirrus.presentation.formatters.PressureFormatter;
-import com.waynedgrant.cirrus.units.PressureUnit;
+import java.math.BigDecimal;
+
+import static junit.framework.Assert.assertEquals;
 
 public class TestPressureFormatter
 {

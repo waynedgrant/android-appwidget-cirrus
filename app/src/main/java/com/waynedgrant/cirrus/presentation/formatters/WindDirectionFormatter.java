@@ -3,12 +3,12 @@
 
 package com.waynedgrant.cirrus.presentation.formatters;
 
-import static com.waynedgrant.cirrus.units.WindDirectionUnit.COMPASS_DEGREES;
+import com.waynedgrant.cirrus.measures.WindDirection;
+import com.waynedgrant.cirrus.units.WindDirectionUnit;
 
 import java.util.Locale;
 
-import com.waynedgrant.cirrus.measures.WindDirection;
-import com.waynedgrant.cirrus.units.WindDirectionUnit;
+import static com.waynedgrant.cirrus.units.WindDirectionUnit.COMPASS_DEGREES;
 
 public class WindDirectionFormatter
 {

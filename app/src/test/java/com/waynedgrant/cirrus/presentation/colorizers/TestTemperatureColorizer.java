@@ -1,12 +1,12 @@
 package com.waynedgrant.cirrus.presentation.colorizers;
 
-import static junit.framework.Assert.assertEquals;
-
-import java.math.BigDecimal;
+import com.waynedgrant.cirrus.measures.Temperature;
 
 import org.junit.Test;
 
-import com.waynedgrant.cirrus.measures.Temperature;
+import java.math.BigDecimal;
+
+import static junit.framework.Assert.assertEquals;
 
 public class TestTemperatureColorizer
 {

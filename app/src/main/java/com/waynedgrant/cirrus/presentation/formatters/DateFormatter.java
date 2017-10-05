@@ -3,9 +3,9 @@
 
 package com.waynedgrant.cirrus.presentation.formatters;
 
-import static com.waynedgrant.cirrus.presentation.formatters.DateFormat.YYYY_MM_DD;
-
 import java.util.Locale;
+
+import static com.waynedgrant.cirrus.presentation.formatters.DateFormat.YYYY_MM_DD;
 
 public class DateFormatter
 {

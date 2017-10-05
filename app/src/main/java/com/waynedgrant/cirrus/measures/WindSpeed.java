@@ -3,10 +3,10 @@
 
 package com.waynedgrant.cirrus.measures;
 
+import com.waynedgrant.cirrus.units.WindSpeedUnit;
+
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-
-import com.waynedgrant.cirrus.units.WindSpeedUnit;
 
 public class WindSpeed
 {

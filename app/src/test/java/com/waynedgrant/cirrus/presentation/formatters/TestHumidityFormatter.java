@@ -1,10 +1,8 @@
 package com.waynedgrant.cirrus.presentation.formatters;
 
-import static junit.framework.Assert.assertEquals;
-
 import org.junit.Test;
 
-import com.waynedgrant.cirrus.presentation.formatters.HumidityFormatter;
+import static junit.framework.Assert.assertEquals;
 
 public class TestHumidityFormatter
 {

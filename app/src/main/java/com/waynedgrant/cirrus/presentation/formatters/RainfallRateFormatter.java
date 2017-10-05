@@ -3,13 +3,13 @@
 
 package com.waynedgrant.cirrus.presentation.formatters;
 
-import static com.waynedgrant.cirrus.units.RainfallUnit.MILLIMETRES;
+import com.waynedgrant.cirrus.measures.Rainfall;
+import com.waynedgrant.cirrus.units.RainfallUnit;
 
 import java.math.RoundingMode;
 import java.util.Locale;
 
-import com.waynedgrant.cirrus.measures.Rainfall;
-import com.waynedgrant.cirrus.units.RainfallUnit;
+import static com.waynedgrant.cirrus.units.RainfallUnit.MILLIMETRES;
 
 public class RainfallRateFormatter
 {

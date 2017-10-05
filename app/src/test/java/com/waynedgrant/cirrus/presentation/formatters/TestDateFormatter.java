@@ -1,11 +1,8 @@
 package com.waynedgrant.cirrus.presentation.formatters;
 
-import static junit.framework.Assert.assertEquals;
-
 import org.junit.Test;
 
-import com.waynedgrant.cirrus.presentation.formatters.DateFormat;
-import com.waynedgrant.cirrus.presentation.formatters.DateFormatter;
+import static junit.framework.Assert.assertEquals;
 
 public class TestDateFormatter
 {

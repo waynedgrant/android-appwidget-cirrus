@@ -3,8 +3,6 @@
 
 package com.waynedgrant.cirrus;
 
-import java.text.MessageFormat;
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.appwidget.AppWidgetManager;
@@ -34,6 +32,8 @@ import com.waynedgrant.cirrus.units.TemperatureUnit;
 import com.waynedgrant.cirrus.units.WindDirectionUnit;
 import com.waynedgrant.cirrus.units.WindSpeedUnit;
 import com.waynedgrant.cirrus.update.Timeout;
+
+import java.text.MessageFormat;
 
 public class WidgetConfigActivity extends Activity
 {

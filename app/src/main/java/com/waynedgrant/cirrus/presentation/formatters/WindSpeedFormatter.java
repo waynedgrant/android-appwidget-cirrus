@@ -3,17 +3,17 @@
 
 package com.waynedgrant.cirrus.presentation.formatters;
 
+import com.waynedgrant.cirrus.measures.WindSpeed;
+import com.waynedgrant.cirrus.units.WindSpeedUnit;
+
+import java.math.RoundingMode;
+import java.util.Locale;
+
 import static com.waynedgrant.cirrus.units.WindSpeedUnit.BEAUFORT_SCALE;
 import static com.waynedgrant.cirrus.units.WindSpeedUnit.KILOMETRES_PER_HOUR;
 import static com.waynedgrant.cirrus.units.WindSpeedUnit.KNOTS;
 import static com.waynedgrant.cirrus.units.WindSpeedUnit.METRES_PER_SECOND;
 import static com.waynedgrant.cirrus.units.WindSpeedUnit.MILES_PER_HOUR;
-
-import java.math.RoundingMode;
-import java.util.Locale;
-
-import com.waynedgrant.cirrus.measures.WindSpeed;
-import com.waynedgrant.cirrus.units.WindSpeedUnit;
 
 public class WindSpeedFormatter
 {

@@ -1,10 +1,10 @@
 package com.waynedgrant.cirrus.presentation.formatters;
 
-import static junit.framework.Assert.assertEquals;
+import com.waynedgrant.cirrus.measures.Conditions;
 
 import org.junit.Test;
 
-import com.waynedgrant.cirrus.measures.Conditions;
+import static junit.framework.Assert.assertEquals;
 
 public class TestConditionsFormatter
 {

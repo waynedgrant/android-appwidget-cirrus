@@ -3,11 +3,11 @@
 
 package com.waynedgrant.cirrus.measures;
 
-import static java.math.MathContext.DECIMAL32;
+import com.waynedgrant.cirrus.units.PressureUnit;
 
 import java.math.BigDecimal;
 
-import com.waynedgrant.cirrus.units.PressureUnit;
+import static java.math.MathContext.DECIMAL32;
 
 public class Pressure
 {

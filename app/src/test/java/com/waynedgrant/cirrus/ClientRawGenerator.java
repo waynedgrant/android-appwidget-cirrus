@@ -1,14 +1,14 @@
 package com.waynedgrant.cirrus;
 
-import java.io.ByteArrayInputStream;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-
 import com.waynedgrant.cirrus.clientraw.ClientRaw;
 import com.waynedgrant.cirrus.clientraw.ClientRawStringGenerator;
 import com.waynedgrant.cirrus.clientraw.ClientRawStringGenerator.Field;
 import com.waynedgrant.cirrus.measures.Conditions;
+
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ClientRawGenerator
 {

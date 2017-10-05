@@ -1,12 +1,5 @@
 package com.waynedgrant.cirrus.presentation.formatters;
 
-import static junit.framework.Assert.assertEquals;
-
-import java.io.IOException;
-
-import org.junit.Before;
-import org.junit.Test;
-
 import com.waynedgrant.cirrus.ClientRawGenerator;
 import com.waynedgrant.cirrus.clientraw.ClientRaw;
 import com.waynedgrant.cirrus.measures.WeatherItem;
@@ -15,6 +8,13 @@ import com.waynedgrant.cirrus.units.RainfallUnit;
 import com.waynedgrant.cirrus.units.TemperatureUnit;
 import com.waynedgrant.cirrus.units.WindDirectionUnit;
 import com.waynedgrant.cirrus.units.WindSpeedUnit;
+
+import org.junit.Before;
+import org.junit.Test;
+
+import java.io.IOException;
+
+import static junit.framework.Assert.assertEquals;
 
 public class TestWeatherItemFormatter
 {

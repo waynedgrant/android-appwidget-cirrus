@@ -1,13 +1,13 @@
 package com.waynedgrant.cirrus.measures;
 
-import static junit.framework.Assert.assertEquals;
-
-import java.math.BigDecimal;
+import com.waynedgrant.cirrus.BigDecimalEquals;
+import com.waynedgrant.cirrus.units.TemperatureUnit;
 
 import org.junit.Test;
 
-import com.waynedgrant.cirrus.BigDecimalEquals;
-import com.waynedgrant.cirrus.units.TemperatureUnit;
+import java.math.BigDecimal;
+
+import static junit.framework.Assert.assertEquals;
 
 public class TestTemperature
 {

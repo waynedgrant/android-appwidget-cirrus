@@ -1,12 +1,10 @@
 package com.waynedgrant.cirrus.presentation.colorizers;
 
-import static junit.framework.Assert.assertEquals;
+import org.junit.Test;
 
 import java.math.BigDecimal;
 
-import org.junit.Test;
-
-import com.waynedgrant.cirrus.presentation.colorizers.UvIndexColorizer;
+import static junit.framework.Assert.assertEquals;
 
 public class TestUvIndexColorizer
 {

@@ -3,16 +3,16 @@
 
 package com.waynedgrant.cirrus.presentation.formatters;
 
-import static com.waynedgrant.cirrus.units.PressureUnit.HECTOPASCALS;
-import static com.waynedgrant.cirrus.units.PressureUnit.INCHES_OF_MERCURY;
-import static com.waynedgrant.cirrus.units.PressureUnit.KILIOPASCALS;
-import static com.waynedgrant.cirrus.units.PressureUnit.MILLIBARS;
+import com.waynedgrant.cirrus.measures.Pressure;
+import com.waynedgrant.cirrus.units.PressureUnit;
 
 import java.math.RoundingMode;
 import java.util.Locale;
 
-import com.waynedgrant.cirrus.measures.Pressure;
-import com.waynedgrant.cirrus.units.PressureUnit;
+import static com.waynedgrant.cirrus.units.PressureUnit.HECTOPASCALS;
+import static com.waynedgrant.cirrus.units.PressureUnit.INCHES_OF_MERCURY;
+import static com.waynedgrant.cirrus.units.PressureUnit.KILIOPASCALS;
+import static com.waynedgrant.cirrus.units.PressureUnit.MILLIBARS;
 
 public class PressureFormatter
 {

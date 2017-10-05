@@ -3,8 +3,6 @@
 
 package com.waynedgrant.cirrus;
 
-import java.util.List;
-
 import android.app.PendingIntent;
 import android.app.Service;
 import android.appwidget.AppWidgetManager;
@@ -41,6 +39,8 @@ import com.waynedgrant.cirrus.units.RainfallUnit;
 import com.waynedgrant.cirrus.units.TemperatureUnit;
 import com.waynedgrant.cirrus.units.WindDirectionUnit;
 import com.waynedgrant.cirrus.units.WindSpeedUnit;
+
+import java.util.List;
 
 public class UpdateWidgetService extends Service
 {

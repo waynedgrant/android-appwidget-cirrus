@@ -1,10 +1,10 @@
 package com.waynedgrant.cirrus.measures;
 
-import static org.junit.Assert.assertEquals;
+import com.waynedgrant.cirrus.units.CardinalDirection;
 
 import org.junit.Test;
 
-import com.waynedgrant.cirrus.units.CardinalDirection;
+import static org.junit.Assert.assertEquals;
 
 public class TestWindDirection
 {

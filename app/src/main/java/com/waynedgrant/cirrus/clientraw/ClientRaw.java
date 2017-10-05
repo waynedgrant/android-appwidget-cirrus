@@ -3,12 +3,6 @@
 
 package com.waynedgrant.cirrus.clientraw;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.LineNumberReader;
-import java.math.BigDecimal;
-
 import com.waynedgrant.cirrus.measures.Conditions;
 import com.waynedgrant.cirrus.measures.Pressure;
 import com.waynedgrant.cirrus.measures.Rainfall;
@@ -16,6 +10,12 @@ import com.waynedgrant.cirrus.measures.Temperature;
 import com.waynedgrant.cirrus.measures.Trend;
 import com.waynedgrant.cirrus.measures.WindDirection;
 import com.waynedgrant.cirrus.measures.WindSpeed;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.LineNumberReader;
+import java.math.BigDecimal;
 
 public class ClientRaw
 {

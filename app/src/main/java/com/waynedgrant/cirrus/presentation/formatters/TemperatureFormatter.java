@@ -3,13 +3,13 @@
 
 package com.waynedgrant.cirrus.presentation.formatters;
 
-import static com.waynedgrant.cirrus.units.TemperatureUnit.CELSIUS;
+import com.waynedgrant.cirrus.measures.Temperature;
+import com.waynedgrant.cirrus.units.TemperatureUnit;
 
 import java.math.RoundingMode;
 import java.util.Locale;
 
-import com.waynedgrant.cirrus.measures.Temperature;
-import com.waynedgrant.cirrus.units.TemperatureUnit;
+import static com.waynedgrant.cirrus.units.TemperatureUnit.CELSIUS;
 
 public class TemperatureFormatter
 {

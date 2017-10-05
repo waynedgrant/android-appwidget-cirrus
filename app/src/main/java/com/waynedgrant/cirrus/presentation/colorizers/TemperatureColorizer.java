@@ -3,11 +3,11 @@
 
 package com.waynedgrant.cirrus.presentation.colorizers;
 
-import java.math.BigDecimal;
-import java.math.RoundingMode;
-
 import com.waynedgrant.cirrus.measures.Temperature;
 import com.waynedgrant.cirrus.units.TemperatureUnit;
+
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 public class TemperatureColorizer
 {

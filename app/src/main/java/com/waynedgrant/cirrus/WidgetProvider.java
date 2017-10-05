@@ -3,8 +3,6 @@
 
 package com.waynedgrant.cirrus;
 
-import java.text.MessageFormat;
-
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
 import android.content.Context;
@@ -13,6 +11,8 @@ import android.widget.Toast;
 
 import com.waynedgrant.cirrus.clientraw.ClientRawCache;
 import com.waynedgrant.cirrus.preferences.Preferences;
+
+import java.text.MessageFormat;
 
 public class WidgetProvider extends AppWidgetProvider
 {

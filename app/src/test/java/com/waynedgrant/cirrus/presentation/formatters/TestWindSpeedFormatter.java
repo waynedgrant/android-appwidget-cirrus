@@ -1,13 +1,13 @@
 package com.waynedgrant.cirrus.presentation.formatters;
 
-import static junit.framework.Assert.assertEquals;
-
-import java.math.BigDecimal;
+import com.waynedgrant.cirrus.measures.WindSpeed;
+import com.waynedgrant.cirrus.units.WindSpeedUnit;
 
 import org.junit.Test;
 
-import com.waynedgrant.cirrus.measures.WindSpeed;
-import com.waynedgrant.cirrus.units.WindSpeedUnit;
+import java.math.BigDecimal;
+
+import static junit.framework.Assert.assertEquals;
 
 public class TestWindSpeedFormatter
 {

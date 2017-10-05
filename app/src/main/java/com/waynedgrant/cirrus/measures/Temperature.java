@@ -3,9 +3,9 @@
 
 package com.waynedgrant.cirrus.measures;
 
-import java.math.BigDecimal;
-
 import com.waynedgrant.cirrus.units.TemperatureUnit;
+
+import java.math.BigDecimal;
 
 public class Temperature
 {

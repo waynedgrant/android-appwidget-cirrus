@@ -1,11 +1,11 @@
 package com.waynedgrant.cirrus.measures;
 
-import java.math.BigDecimal;
+import com.waynedgrant.cirrus.BigDecimalEquals;
+import com.waynedgrant.cirrus.units.WindSpeedUnit;
 
 import org.junit.Test;
 
-import com.waynedgrant.cirrus.BigDecimalEquals;
-import com.waynedgrant.cirrus.units.WindSpeedUnit;
+import java.math.BigDecimal;
 
 public class TestWindSpeed
 {
