@@ -1,5 +1,9 @@
-bin/
-gen/
-.settings
+/.gradle/*
+/.idea/*
+/build/*
+/*/build/*
+/gradle/*
 
-.DS_Store
+*.iml
+local.properties
+

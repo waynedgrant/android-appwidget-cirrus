@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Cirrus</string>
+    <string name="app_version">1.1</string>
+
+    <!-- Widget Config Activity -->
+    <string name="clientRawUrlTextView.text">Client Raw URL</string>
+    <string name="clientRawUrlEditText.hint">www.example.com/weather</string>
+    <string name="stationNameTextView.text">Station Name</string>
+    <string name="overrideStationNameCheckBox.text">Override Station Name?</string>
+    <string name="stationNameEditText.hint">Station Name</string>
+    <string name="weatherItemsTextView.text">Weather Items</string>
+    <string name="weatherItem1TextView.text">Weather Item 1</string>
+    <string name="weatherItem1Spinner.text">Weather Item 1</string>
+    <string name="weatherItem2TextView.text">Weather Item 2</string>
+    <string name="weatherItem2Spinner.text">Weather Item 2</string>
+    <string name="weatherItem3TextView.text">Weather Item 3</string>
+    <string name="weatherItem3Spinner.text">Weather Item 3</string>
+    <string name="weatherItem4TextView.text">Weather Item 4</string>
+    <string name="weatherItem4Spinner.text">Weather Item 4</string>
+    <string name="weatherItem5TextView.text">Weather Item 5</string>
+    <string name="weatherItem5Spinner.text">Weather Item 5</string>
+    <string name="measurementUnitsTextView.text">Measurement Units</string>
+    <string name="temperatureUnitTextView.text">Temperature Unit</string>
+    <string name="temperatureUnitSpinner.text">Temperature Unit</string>
+    <string name="pressureUnitTextView.text">Pressure Unit</string>
+    <string name="pressureUnitSpinner.text">Pressure Unit</string>
+    <string name="windSpeedUnitTextView.text">Wind Speed Unit</string>
+    <string name="windSpeedUnitSpinner.text">Wind Speed Unit</string>
+    <string name="windDirectionUnitTextView.text">Wind Direction Unit</string>
+    <string name="windDirectionUnitSpinner.text">Wind Direction Unit</string>
+    <string name="rainfallUnitTextView.text">Rainfall Unit</string>
+    <string name="rainfallUnitSpinner.text">Rainfall Unit</string>
+    <string name="dateTimeDisplayTextView.text">Date/Time Display</string>
+    <string name="displayDateCheckBox.text">Display Date?</string>
+    <string name="dateFormatTextView.text">Date Format</string>
+    <string name="dateFormatSpinner.text">Date Format</string>
+    <string name="timeFormatTextView.text">Time Format</string>
+    <string name="timeFormatSpinner.text">Time Format</string>
+    <string name="appearanceTextView.text">Appearance</string>
+    <string name="transparentCheckBox.text">Transparent?</string>
+    <string name="weatherUpdateTextView.text">Weather Update</string>
+    <string name="connectionTimeoutTextView.text">Connection Timeout</string>
+    <string name="connectionTimeoutSpinner.text">Connection Timeout</string>
+    <string name="readTimeoutTextView.text">Read Timeout</string>
+    <string name="readTimeoutSpinner.text">Read Timeout</string>
+    <string name="okButton.text">OK</string>
+    <string name="aboutButton.text">About</string>
+    <string name="about.title">About {0}</string>
+    <string name="about.message"><![CDATA[<html>Copyright © 2017 Wayne Grant<br/><a href="http://www.waynedgrant.com">www.waynedgrant.com</a></html>]]></string>
+    <string name="clientRawUrlRequired.message">Client Raw URL Required</string>
+    <string name="clientRawUrlProtocolNotSupported.message">Client Raw URL must begin with protocol of http or https</string>
+    <string name="stationNameRequired.message">Station Name Required</string>
+    <string name="cirrusError.message">{0} Error: {1}</string>
+
+</resources>
