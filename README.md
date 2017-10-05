@@ -12,7 +12,7 @@ android-appwidget-cirrus is an Android App Widget that displays data from any WD
 
 android-appwidget-cirrus supports the display of many different weather items and measurement units.
 
-![alt tag](res/drawable-nodpi/preview.png)
+![alt tag](app/src/main/res/drawable-nodpi/preview.png)
 
 ## Requirements
 
