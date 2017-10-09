@@ -48,6 +48,7 @@ import static android.appwidget.AppWidgetManager.EXTRA_APPWIDGET_ID;
 import static android.appwidget.AppWidgetManager.EXTRA_APPWIDGET_IDS;
 import static android.view.View.INVISIBLE;
 import static android.view.View.VISIBLE;
+import static com.waynedgrant.cirrus.R.drawable.error;
 import static com.waynedgrant.cirrus.R.drawable.refreshing;
 import static com.waynedgrant.cirrus.R.drawable.widget_shape_opaque;
 import static com.waynedgrant.cirrus.R.drawable.widget_shape_transparent;
@@ -237,7 +238,7 @@ public class UpdateWidgetService extends Service
 
     private void updateStatusToDisplayError(int appWidgetId, RemoteViews remoteViews, String errorMessage)
     {
-        remoteViews.setImageViewResource(statusImage, R.drawable.error);
+        remoteViews.setImageViewResource(statusImage, error);
         remoteViews.setViewVisibility(statusImage, VISIBLE);
 
         Context context = getApplicationContext();

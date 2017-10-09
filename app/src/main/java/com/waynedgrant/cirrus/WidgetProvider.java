@@ -15,6 +15,10 @@ import com.waynedgrant.cirrus.preferences.Preferences;
 
 import java.text.MessageFormat;
 
+import static android.appwidget.AppWidgetManager.EXTRA_APPWIDGET_IDS;
+import static android.widget.Toast.LENGTH_SHORT;
+import static com.waynedgrant.cirrus.R.string.cirrusError_message;
+
 public class WidgetProvider extends AppWidgetProvider
 {
     private static final String TAG = "WidgetProvider";
@@ -35,7 +39,7 @@ public class WidgetProvider extends AppWidgetProvider
     private void callUpdateService(Context context, int[] appWidgetIds)
     {
         Intent intent = new Intent(context.getApplicationContext(), UpdateWidgetService.class);
-        intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, appWidgetIds);
+        intent.putExtra(EXTRA_APPWIDGET_IDS, appWidgetIds);
         intent.putExtra(FETCH_FRESH_CLIENT_RAW, true);
 
         context.startService(intent);
@@ -53,9 +57,9 @@ public class WidgetProvider extends AppWidgetProvider
             if (errorMessage != null)
             {
                 String toastErrorMessage =
-                        MessageFormat.format(context.getString(R.string.cirrusError_message),
+                        MessageFormat.format(context.getString(cirrusError_message),
                                 context.getString(R.string.app_name), errorMessage);
-                Toast.makeText(context, toastErrorMessage, Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, toastErrorMessage, LENGTH_SHORT).show();
             }
         }
 

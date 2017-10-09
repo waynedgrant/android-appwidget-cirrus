@@ -3,7 +3,6 @@
 
 package com.waynedgrant.cirrus.clientraw;
 
-import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
@@ -20,6 +19,8 @@ import java.net.URLConnection;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.List;
+
+import static android.content.Context.CONNECTIVITY_SERVICE;
 
 public class RetrieveClientRawTask extends AsyncTask<ClientRawRequest, Void, List<ClientRawResponse>>
 {
@@ -87,7 +88,8 @@ public class RetrieveClientRawTask extends AsyncTask<ClientRawRequest, Void, Lis
 
         while (clientRaw.isEmpty() && fetchClientRawAttempts <= MAX_FETCH_CLIENT_RAW_ATTEMPTS)
         {
-            Log.d(TAG, String.format("Fetched clientraw.txt is empty, re-fetching attempt %s of %d", fetchClientRawAttempts, MAX_FETCH_CLIENT_RAW_ATTEMPTS));
+            Log.d(TAG, String.format("Fetched clientraw.txt is empty, re-fetching attempt %s of %d",
+                    fetchClientRawAttempts, MAX_FETCH_CLIENT_RAW_ATTEMPTS));
 
             waitFor(WAIT_BETWEEN_FETCH_CLIENT_RAW_ATTEMPTS_MSECS);
             clientRaw = fetchClientRaw(clientRawUrl);
@@ -191,8 +193,10 @@ public class RetrieveClientRawTask extends AsyncTask<ClientRawRequest, Void, Lis
     {
         Log.d(TAG, "isOnline()");
 
-        ConnectivityManager cm = (ConnectivityManager)updateWidgetService.getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo networkInfo = cm.getActiveNetworkInfo();
+        ConnectivityManager connectivityManager =
+                (ConnectivityManager)updateWidgetService.getApplicationContext().getSystemService(CONNECTIVITY_SERVICE);
+
+        NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
 
         Log.d(TAG, "networkInfo=" + networkInfo);
 
