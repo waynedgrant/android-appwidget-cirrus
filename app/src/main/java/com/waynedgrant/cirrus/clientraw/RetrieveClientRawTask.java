@@ -31,7 +31,6 @@ public class RetrieveClientRawTask extends AsyncTask<ClientRawRequest, Void, Lis
     private static final int MAX_IS_ONLINE_ATTEMPTS = 3;
     private static final long MAX_WAIT_BETWEEN_IS_ONLINE_ATTEMPTS_MSECS = 1000;
 
-
     private UpdateWidgetService updateWidgetService;
     private int connectTimeoutMs;
     private int readTimeoutMs;
