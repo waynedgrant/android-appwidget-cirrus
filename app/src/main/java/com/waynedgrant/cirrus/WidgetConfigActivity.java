@@ -13,6 +13,7 @@ import android.content.res.Resources;
 import android.os.Bundle;
 import android.text.Html;
 import android.text.method.LinkMovementMethod;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -37,12 +38,16 @@ import java.text.MessageFormat;
 
 public class WidgetConfigActivity extends Activity
 {
+    private static final String TAG = "WidgetConfigActivity";
+
     private int appWidgetId;
     private Intent resultValue;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
+        Log.d(TAG, "onCreate()");
+
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.widget_config_layout);
@@ -135,6 +140,8 @@ public class WidgetConfigActivity extends Activity
 
     public void onClickOverrideStationName(View view)
     {
+        Log.d(TAG, "onClickOverrideStationName()");
+
         CheckBox overrideStationNameCheckBox = (CheckBox)view;
         EditText stationNameEditText = (EditText)findViewById(R.id.stationNameEditText);
 
@@ -150,6 +157,8 @@ public class WidgetConfigActivity extends Activity
 
     public void onClickDisplayDate(View view)
     {
+        Log.d(TAG, "onClickDisplayDate()");
+
         CheckBox displayDateCheckBox = (CheckBox)view;
         TextView dateFormatTextView = (TextView)findViewById(R.id.dateFormatTextView);
         Spinner dateFormatSpinner = (Spinner)findViewById(R.id.dateFormatSpinner);
@@ -168,6 +177,8 @@ public class WidgetConfigActivity extends Activity
 
     public void onClickOk(View view)
     {
+        Log.d(TAG, "onClickOk()");
+
         Context context = getApplicationContext();
 
         if (!isClientRawUrlPopulated())
@@ -312,6 +323,8 @@ public class WidgetConfigActivity extends Activity
 
     public void onClickAbout(View view)
     {
+        Log.d(TAG, "onClickAbout()");
+
         Resources resources = getResources();
 
         String aboutTitle =

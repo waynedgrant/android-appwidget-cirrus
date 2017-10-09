@@ -36,4 +36,11 @@ public class ClientRawUrl
 
         return correctedUrl;
     }
+
+    @Override
+    public String toString() {
+        return "ClientRawUrl{" +
+                "url='" + url + '\'' +
+                '}';
+    }
 }

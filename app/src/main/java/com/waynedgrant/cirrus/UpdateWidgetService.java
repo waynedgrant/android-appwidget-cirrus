@@ -10,6 +10,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.IBinder;
+import android.util.Log;
 import android.view.View;
 import android.widget.RemoteViews;
 
@@ -44,9 +45,13 @@ import java.util.List;
 
 public class UpdateWidgetService extends Service
 {
+    private static final String TAG = "UpdateWidgetService";
+
     @Override
     public int onStartCommand(Intent intent, int flags, int startId)
     {
+        Log.d(TAG, "onStartCommand()");
+
         int[] appWidgetIds = intent.getIntArrayExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS);
 
         if (appWidgetIds != null)
@@ -79,6 +84,8 @@ public class UpdateWidgetService extends Service
 
     private void requestUpdatedClientRaw(int appWidgetId, Preferences preferences)
     {
+        Log.d(TAG, "requestUpdatedClientRaw()");
+
         String clientRawUrl = preferences.getClientRawUrl(appWidgetId);
         int connectTimeoutMs = preferences.getConnectionTimeout(appWidgetId).getTimeoutMsecs();
         int readTimeoutMs = preferences.getReadTimeout(appWidgetId).getTimeoutMsecs();
@@ -99,11 +106,15 @@ public class UpdateWidgetService extends Service
     @Override
     public IBinder onBind(Intent intent)
     {
+        Log.d(TAG, "onBind()");
+
         return null;
     }
 
     private void updateDisplayWithCachedClientRaw(int appWidgetId, Preferences preferences)
     {
+        Log.d(TAG, "updateDisplayWithCachedClientRaw()");
+
         RemoteViews remoteViews = getRemoteViews();
 
         ClientRaw clientRaw = ClientRawCache.fetch(appWidgetId);
@@ -124,6 +135,8 @@ public class UpdateWidgetService extends Service
 
     public void handleClientRawResponses(List<ClientRawResponse> responses)
     {
+        Log.d(TAG, "handleClientRawResponses()");
+
         Preferences preferences = new Preferences(getApplicationContext());
 
         for (ClientRawResponse response : responses)

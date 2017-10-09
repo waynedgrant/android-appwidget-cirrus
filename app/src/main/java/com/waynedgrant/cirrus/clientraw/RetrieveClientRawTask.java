@@ -7,6 +7,7 @@ import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
+import android.util.Log;
 
 import com.waynedgrant.cirrus.UpdateWidgetService;
 
@@ -22,6 +23,8 @@ import java.util.List;
 
 public class RetrieveClientRawTask extends AsyncTask<ClientRawRequest, Void, List<ClientRawResponse>>
 {
+    private static final String TAG = "RetrieveClientRawTask";
+
     private static final int MAX_FETCH_CLIENT_RAW_ATTEMPTS = 3;
     private static final long WAIT_BETWEEN_FETCH_CLIENT_RAW_ATTEMPTS_MSECS = 1000;
 
@@ -38,6 +41,8 @@ public class RetrieveClientRawTask extends AsyncTask<ClientRawRequest, Void, Lis
 
     protected List<ClientRawResponse> doInBackground(ClientRawRequest... requests)
     {
+        Log.d(TAG, "doInBackground()");
+
         List<ClientRawResponse> responses = new ArrayList<ClientRawResponse>();
 
         for (ClientRawRequest request : requests)
@@ -49,10 +54,14 @@ public class RetrieveClientRawTask extends AsyncTask<ClientRawRequest, Void, Lis
 
             if (!isOnline())
             {
+                Log.d(TAG, "Device is not online");
+
                 response = new ClientRawResponse(appWidgetId, "not online");
             }
             else
             {
+                Log.d(TAG, "Device is online");
+
                 try
                 {
                     ClientRaw clientRaw = whileClientRawEmptyRetryFetch(clientRawUrl, fetchClientRaw(clientRawUrl));
@@ -78,6 +87,8 @@ public class RetrieveClientRawTask extends AsyncTask<ClientRawRequest, Void, Lis
 
         while (clientRaw.isEmpty() && fetchClientRawAttempts <= MAX_FETCH_CLIENT_RAW_ATTEMPTS)
         {
+            Log.d(TAG, String.format("Fetched clientraw.txt is empty, re-fetching attempt %s of %d", fetchClientRawAttempts, MAX_FETCH_CLIENT_RAW_ATTEMPTS));
+
             waitFor(WAIT_BETWEEN_FETCH_CLIENT_RAW_ATTEMPTS_MSECS);
             clientRaw = fetchClientRaw(clientRawUrl);
             fetchClientRawAttempts++;
@@ -88,6 +99,8 @@ public class RetrieveClientRawTask extends AsyncTask<ClientRawRequest, Void, Lis
 
     private ClientRaw fetchClientRaw(ClientRawUrl clientRawUrl) throws IOException
     {
+        Log.d(TAG, String.format("Fetching clientraw.txt from %s", clientRawUrl));
+
         ClientRaw clientRaw;
         URLConnection connection = new URL(clientRawUrl.getUrl()).openConnection();
 
@@ -117,14 +130,19 @@ public class RetrieveClientRawTask extends AsyncTask<ClientRawRequest, Void, Lis
 
         if (clientRaw.isEmpty())
         {
-            response = new ClientRawResponse(appWidgetId, "empty clientraw.txt received");
+            String errorMessage = "Empty clientraw.txt received";
+            Log.d(TAG, errorMessage);
+            response = new ClientRawResponse(appWidgetId, errorMessage);
         }
         else if (!clientRaw.isValid())
         {
-            response = new ClientRawResponse(appWidgetId, "invalid clientraw.txt received");
+            String errorMessage = "Invalid clientraw.txt received";
+            Log.d(TAG, errorMessage);
+            response = new ClientRawResponse(appWidgetId, errorMessage);
         }
         else
         {
+            Log.d(TAG, "Valid clientraw.txt received");
             response = new ClientRawResponse(appWidgetId, clientRaw);
         }
 
@@ -145,11 +163,13 @@ public class RetrieveClientRawTask extends AsyncTask<ClientRawRequest, Void, Lis
 
     private ClientRawResponse handleException(int appWidgetId, IOException exception)
     {
+        Log.e(TAG, "Exception occurred when fetching clientraw.txt", exception);
+
         ClientRawResponse response;
 
         if (exception instanceof SocketTimeoutException)
         {
-            response = new ClientRawResponse(appWidgetId, "connection timed out");
+            response = new ClientRawResponse(appWidgetId, "Connection timed out");
         }
         else if (exception instanceof FileNotFoundException)
         {
@@ -157,11 +177,11 @@ public class RetrieveClientRawTask extends AsyncTask<ClientRawRequest, Void, Lis
         }
         else if (exception instanceof UnknownHostException)
         {
-            response = new ClientRawResponse(appWidgetId, "unknown host");
+            response = new ClientRawResponse(appWidgetId, "Unknown host");
         }
         else
         {
-            response = new ClientRawResponse(appWidgetId, "connection issue");
+            response = new ClientRawResponse(appWidgetId, "Connection issue");
         }
 
         return response;
@@ -169,13 +189,20 @@ public class RetrieveClientRawTask extends AsyncTask<ClientRawRequest, Void, Lis
 
     private boolean isOnline()
     {
+        Log.d(TAG, "isOnline()");
+
         ConnectivityManager cm = (ConnectivityManager)updateWidgetService.getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo = cm.getActiveNetworkInfo();
+
+        Log.d(TAG, "networkInfo=" + networkInfo);
+
         return networkInfo != null && networkInfo.isConnected();
     }
 
     protected void onPostExecute(List<ClientRawResponse> responses)
     {
+        Log.d(TAG, "onPostExecute()");
+
         updateWidgetService.handleClientRawResponses(responses);
     }
 }

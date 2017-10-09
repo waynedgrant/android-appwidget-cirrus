@@ -7,6 +7,7 @@ import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.waynedgrant.cirrus.clientraw.ClientRawCache;
@@ -16,6 +17,8 @@ import java.text.MessageFormat;
 
 public class WidgetProvider extends AppWidgetProvider
 {
+    private static final String TAG = "WidgetProvider";
+
     public static final String ERROR_ACTION = "com.waynedgrant.cirrus.error";
     public static final String ERROR_MESSAGE_EXTRA = "com.waynedgrant.cirrus.errorMessage";
     public static final String FETCH_FRESH_CLIENT_RAW = "com.waynedgrant.cirrus.fetchFreshClientRaw";
@@ -23,6 +26,8 @@ public class WidgetProvider extends AppWidgetProvider
     @Override
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds)
     {
+        Log.d(TAG, "onUpdate()");
+
         callUpdateService(context, appWidgetIds);
         super.onUpdate(context, appWidgetManager, appWidgetIds);
     }
@@ -39,6 +44,8 @@ public class WidgetProvider extends AppWidgetProvider
     @Override
     public void onReceive(Context context, Intent intent)
     {
+        Log.d(TAG, "onReceive()");
+
         if (intent.getAction().equals(ERROR_ACTION))
         {
             String errorMessage = intent.getStringExtra(ERROR_MESSAGE_EXTRA);
@@ -58,6 +65,8 @@ public class WidgetProvider extends AppWidgetProvider
     @Override
     public void onDeleted(Context context, int[] appWidgetIds)
     {
+        Log.d(TAG, "onDeleted()");
+
         deletePreferences(context, appWidgetIds);
         clearClientRawCache(appWidgetIds);
         super.onDeleted(context, appWidgetIds);
