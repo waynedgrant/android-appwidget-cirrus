@@ -28,6 +28,9 @@ public class RetrieveClientRawTask extends AsyncTask<ClientRawRequest, Void, Lis
 
     private static final int MAX_FETCH_CLIENT_RAW_ATTEMPTS = 3;
     private static final long WAIT_BETWEEN_FETCH_CLIENT_RAW_ATTEMPTS_MSECS = 1000;
+    private static final int MAX_IS_ONLINE_ATTEMPTS = 3;
+    private static final long MAX_WAIT_BETWEEN_IS_ONLINE_ATTEMPTS_MSECS = 1000;
+
 
     private UpdateWidgetService updateWidgetService;
     private int connectTimeoutMs;
@@ -53,16 +56,12 @@ public class RetrieveClientRawTask extends AsyncTask<ClientRawRequest, Void, Lis
 
             ClientRawResponse response;
 
-            if (!isOnline())
+            if (!whileNotOnlineRetryCheck(isOnline()))
             {
-                Log.d(TAG, "Device is not online");
-
-                response = new ClientRawResponse(appWidgetId, "not online");
+                response = new ClientRawResponse(appWidgetId, "Not online");
             }
             else
             {
-                Log.d(TAG, "Device is online");
-
                 try
                 {
                     ClientRaw clientRaw = whileClientRawEmptyRetryFetch(clientRawUrl, fetchClientRaw(clientRawUrl));
@@ -88,7 +87,7 @@ public class RetrieveClientRawTask extends AsyncTask<ClientRawRequest, Void, Lis
 
         while (clientRaw.isEmpty() && fetchClientRawAttempts <= MAX_FETCH_CLIENT_RAW_ATTEMPTS)
         {
-            Log.d(TAG, String.format("Fetched clientraw.txt is empty, re-fetching attempt %s of %d",
+            Log.d(TAG, String.format("Fetched clientraw.txt is empty, attempting retry %s of %d",
                     fetchClientRawAttempts, MAX_FETCH_CLIENT_RAW_ATTEMPTS));
 
             waitFor(WAIT_BETWEEN_FETCH_CLIENT_RAW_ATTEMPTS_MSECS);
@@ -189,9 +188,26 @@ public class RetrieveClientRawTask extends AsyncTask<ClientRawRequest, Void, Lis
         return response;
     }
 
+    private boolean whileNotOnlineRetryCheck(boolean isOnline)
+    {
+        int isOnlineAttempts = 1;
+
+        while (!isOnline && isOnlineAttempts <= MAX_IS_ONLINE_ATTEMPTS)
+        {
+            Log.d(TAG, String.format("Not online, attempting retry of online check %s of %d",
+                    isOnlineAttempts, MAX_IS_ONLINE_ATTEMPTS));
+
+            waitFor(MAX_WAIT_BETWEEN_IS_ONLINE_ATTEMPTS_MSECS);
+            isOnline = isOnline();
+            isOnlineAttempts++;
+        }
+
+        return isOnline;
+    }
+
     private boolean isOnline()
     {
-        Log.d(TAG, "isOnline()");
+        Log.d(TAG, "Checking if device is online");
 
         ConnectivityManager connectivityManager =
                 (ConnectivityManager)updateWidgetService.getApplicationContext().getSystemService(CONNECTIVITY_SERVICE);
@@ -200,7 +216,11 @@ public class RetrieveClientRawTask extends AsyncTask<ClientRawRequest, Void, Lis
 
         Log.d(TAG, "networkInfo=" + networkInfo);
 
-        return networkInfo != null && networkInfo.isConnected();
+        boolean isOnline = (networkInfo != null && networkInfo.isConnected());
+
+        Log.d(TAG, String.format("Device is online=%b", isOnline));
+
+        return isOnline;
     }
 
     protected void onPostExecute(List<ClientRawResponse> responses)
