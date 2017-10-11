@@ -28,8 +28,8 @@ public class RetrieveClientRawTask extends AsyncTask<ClientRawRequest, Void, Lis
 
     private static final int MAX_FETCH_CLIENT_RAW_ATTEMPTS = 3;
     private static final long WAIT_BETWEEN_FETCH_CLIENT_RAW_ATTEMPTS_MSECS = 1000;
-    private static final int MAX_IS_ONLINE_ATTEMPTS = 3;
-    private static final long MAX_WAIT_BETWEEN_IS_ONLINE_ATTEMPTS_MSECS = 1000;
+    private static final int MAX_IS_ONLINE_ATTEMPTS = 5;
+    private static final long MAX_WAIT_BETWEEN_IS_ONLINE_ATTEMPTS_MSECS = 5000;
 
     private UpdateWidgetService updateWidgetService;
     private int connectTimeoutMs;
@@ -86,10 +86,11 @@ public class RetrieveClientRawTask extends AsyncTask<ClientRawRequest, Void, Lis
 
         while (clientRaw.isEmpty() && fetchClientRawAttempts <= MAX_FETCH_CLIENT_RAW_ATTEMPTS)
         {
+            waitFor(WAIT_BETWEEN_FETCH_CLIENT_RAW_ATTEMPTS_MSECS);
+
             Log.d(TAG, String.format("Fetched clientraw.txt is empty, attempting retry %s of %d",
                     fetchClientRawAttempts, MAX_FETCH_CLIENT_RAW_ATTEMPTS));
 
-            waitFor(WAIT_BETWEEN_FETCH_CLIENT_RAW_ATTEMPTS_MSECS);
             clientRaw = fetchClientRaw(clientRawUrl);
             fetchClientRawAttempts++;
         }
@@ -193,10 +194,11 @@ public class RetrieveClientRawTask extends AsyncTask<ClientRawRequest, Void, Lis
 
         while (!isOnline && isOnlineAttempts <= MAX_IS_ONLINE_ATTEMPTS)
         {
+            waitFor(MAX_WAIT_BETWEEN_IS_ONLINE_ATTEMPTS_MSECS);
+
             Log.d(TAG, String.format("Not online, attempting retry of online check %s of %d",
                     isOnlineAttempts, MAX_IS_ONLINE_ATTEMPTS));
 
-            waitFor(MAX_WAIT_BETWEEN_IS_ONLINE_ATTEMPTS_MSECS);
             isOnline = isOnline();
             isOnlineAttempts++;
         }
