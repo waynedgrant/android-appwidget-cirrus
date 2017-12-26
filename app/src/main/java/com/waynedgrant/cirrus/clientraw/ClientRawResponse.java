@@ -3,36 +3,30 @@
 
 package com.waynedgrant.cirrus.clientraw;
 
-public class ClientRawResponse
-{
+public class ClientRawResponse {
     private int appWidgetId;
     private ClientRaw clientRaw;
     private String errorMessage;
 
-    public ClientRawResponse(int appWidgetId, ClientRaw clientRaw)
-    {
+    public ClientRawResponse(int appWidgetId, ClientRaw clientRaw) {
         this.appWidgetId = appWidgetId;
         this.clientRaw = clientRaw;
     }
 
-    public ClientRawResponse(int appWidgetId, String errorMessage)
-    {
+    public ClientRawResponse(int appWidgetId, String errorMessage) {
         this.appWidgetId = appWidgetId;
         this.errorMessage = errorMessage;
     }
 
-    public int getAppWidgetId()
-    {
+    public int getAppWidgetId() {
         return appWidgetId;
     }
 
-    public ClientRaw getClientRaw()
-    {
+    public ClientRaw getClientRaw() {
         return clientRaw;
     }
 
-    public String getErrorMessage()
-    {
+    public String getErrorMessage() {
         return errorMessage;
     }
 }

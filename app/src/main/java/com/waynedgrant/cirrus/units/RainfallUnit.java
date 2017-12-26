@@ -3,20 +3,17 @@
 
 package com.waynedgrant.cirrus.units;
 
-public enum RainfallUnit
-{
+public enum RainfallUnit {
     INCHES("Inches (in)"),
     MILLIMETRES("Millimetres (mm)");
 
     private String description;
 
-    RainfallUnit(String description)
-    {
+    RainfallUnit(String description) {
         this.description = description;
     }
 
-    public String toString()
-    {
+    public String toString() {
         return description;
     }
 }

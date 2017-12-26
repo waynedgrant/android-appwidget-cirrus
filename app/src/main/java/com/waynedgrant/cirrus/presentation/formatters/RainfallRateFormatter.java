@@ -11,45 +11,33 @@ import java.util.Locale;
 
 import static com.waynedgrant.cirrus.units.RainfallUnit.MILLIMETRES;
 
-public class RainfallRateFormatter
-{
+public class RainfallRateFormatter {
     private Rainfall rainfallRatePerMinute;
 
-    public RainfallRateFormatter(Rainfall rainfallRatePerMinute)
-    {
+    public RainfallRateFormatter(Rainfall rainfallRatePerMinute) {
         this.rainfallRatePerMinute = rainfallRatePerMinute;
     }
 
-    public String format(RainfallUnit unit)
-    {
+    public String format(RainfallUnit unit) {
         String formatted;
 
-        if (rainfallRatePerMinute != null)
-        {
+        if (rainfallRatePerMinute != null) {
             String formatString;
             int scale;
 
-            if (unit == MILLIMETRES)
-            {
+            if (unit == MILLIMETRES) {
                 formatString = "%1.2f mm/min";
                 scale = 2;
-            }
-            else
-            {
+            } else {
                 formatString = "%1.3f in/min";
                 scale = 3;
             }
 
             formatted = String.format(Locale.US, formatString, rainfallRatePerMinute.getValue(unit).setScale(scale, RoundingMode.HALF_DOWN));
-        }
-        else
-        {
-            if (unit == MILLIMETRES)
-            {
+        } else {
+            if (unit == MILLIMETRES) {
                 formatted = "-.-- mm/min";
-            }
-            else
-            {
+            } else {
                 formatted = "-.--- in/min";
             }
         }

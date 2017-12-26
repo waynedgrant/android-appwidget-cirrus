@@ -73,16 +73,14 @@ import static com.waynedgrant.cirrus.R.string.clientRawUrlRequired_message;
 import static com.waynedgrant.cirrus.R.string.stationNameRequired_message;
 import static com.waynedgrant.cirrus.WidgetProvider.FETCH_FRESH_CLIENT_RAW;
 
-public class WidgetConfigActivity extends Activity
-{
+public class WidgetConfigActivity extends Activity {
     private static final String TAG = "WidgetConfigActivity";
 
     private int appWidgetId;
     private Intent resultValue;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         Log.d(TAG, "onCreate()");
 
         super.onCreate(savedInstanceState);
@@ -97,31 +95,28 @@ public class WidgetConfigActivity extends Activity
 
         setResult(RESULT_CANCELED, resultValue);
 
-        if (appWidgetId == INVALID_APPWIDGET_ID)
-        {
+        if (appWidgetId == INVALID_APPWIDGET_ID) {
             finish();
         }
 
         populateActivity();
     }
 
-    private void populateActivity()
-    {
+    private void populateActivity() {
         Preferences preferences = new Preferences(getApplicationContext());
 
         String clientRawUrl = preferences.getClientRawUrl(appWidgetId);
 
-        EditText editTextUrl = (EditText)findViewById(clientRawUrlEditText);
+        EditText editTextUrl = (EditText) findViewById(clientRawUrlEditText);
         editTextUrl.setText(clientRawUrl);
 
         String stationName = preferences.getStationName(appWidgetId);
 
-        if (stationName != null)
-        {
-            CheckBox overrideStationNameCheckBoxControl = (CheckBox)findViewById(overrideStationNameCheckBox);
+        if (stationName != null) {
+            CheckBox overrideStationNameCheckBoxControl = (CheckBox) findViewById(overrideStationNameCheckBox);
             overrideStationNameCheckBoxControl.setChecked(true);
 
-            EditText stationNameEditTextControl = (EditText)findViewById(stationNameEditText);
+            EditText stationNameEditTextControl = (EditText) findViewById(stationNameEditText);
             stationNameEditTextControl.setText(stationName);
             stationNameEditTextControl.setVisibility(VISIBLE);
         }
@@ -142,15 +137,14 @@ public class WidgetConfigActivity extends Activity
 
         populateSpinner(dateFormatSpinner, DateFormat.values(), preferences.getDateFormat(appWidgetId));
 
-        if (preferences.getDateFormat(appWidgetId) != null)
-        {
-            CheckBox displayDateCheckBoxControl = (CheckBox)findViewById(displayDateCheckBox);
+        if (preferences.getDateFormat(appWidgetId) != null) {
+            CheckBox displayDateCheckBoxControl = (CheckBox) findViewById(displayDateCheckBox);
             displayDateCheckBoxControl.setChecked(true);
 
-            TextView dateFormatTextViewControl = (TextView)findViewById(dateFormatTextView);
+            TextView dateFormatTextViewControl = (TextView) findViewById(dateFormatTextView);
             dateFormatTextViewControl.setVisibility(VISIBLE);
 
-            Spinner dateFormatSpinnerControl = (Spinner)findViewById(dateFormatSpinner);
+            Spinner dateFormatSpinnerControl = (Spinner) findViewById(dateFormatSpinner);
             dateFormatSpinnerControl.setVisibility(VISIBLE);
         }
 
@@ -161,77 +155,60 @@ public class WidgetConfigActivity extends Activity
 
         boolean transparent = preferences.isTransparent(appWidgetId);
 
-        CheckBox transparentCheckBoxControl = (CheckBox)findViewById(transparentCheckBox);
+        CheckBox transparentCheckBoxControl = (CheckBox) findViewById(transparentCheckBox);
         transparentCheckBoxControl.setChecked(transparent);
     }
 
-    private <T> void populateSpinner(int spinnerId, T[] items, T selectedItem)
-    {
+    private <T> void populateSpinner(int spinnerId, T[] items, T selectedItem) {
         ArrayAdapter<T> arrayAdapter = new ArrayAdapter<T>(this, simple_spinner_item, items);
 
-        Spinner spinner = (Spinner)findViewById(spinnerId);
+        Spinner spinner = (Spinner) findViewById(spinnerId);
         arrayAdapter.setDropDownViewResource(simple_spinner_dropdown_item);
         spinner.setAdapter(arrayAdapter);
         spinner.setSelection(arrayAdapter.getPosition(selectedItem));
     }
 
-    public void onClickOverrideStationName(View view)
-    {
+    public void onClickOverrideStationName(View view) {
         Log.d(TAG, "onClickOverrideStationName()");
 
-        CheckBox overrideStationNameCheckBox = (CheckBox)view;
-        EditText stationNameEditTextControl = (EditText)findViewById(stationNameEditText);
+        CheckBox overrideStationNameCheckBox = (CheckBox) view;
+        EditText stationNameEditTextControl = (EditText) findViewById(stationNameEditText);
 
-        if (overrideStationNameCheckBox.isChecked())
-        {
+        if (overrideStationNameCheckBox.isChecked()) {
             stationNameEditTextControl.setVisibility(VISIBLE);
-        }
-        else
-        {
+        } else {
             stationNameEditTextControl.setVisibility(GONE);
         }
     }
 
-    public void onClickDisplayDate(View view)
-    {
+    public void onClickDisplayDate(View view) {
         Log.d(TAG, "onClickDisplayDate()");
 
-        CheckBox displayDateCheckBoxControl = (CheckBox)view;
-        TextView dateFormatTextViewControl = (TextView)findViewById(dateFormatTextView);
-        Spinner dateFormatSpinnerControl = (Spinner)findViewById(dateFormatSpinner);
+        CheckBox displayDateCheckBoxControl = (CheckBox) view;
+        TextView dateFormatTextViewControl = (TextView) findViewById(dateFormatTextView);
+        Spinner dateFormatSpinnerControl = (Spinner) findViewById(dateFormatSpinner);
 
-        if (displayDateCheckBoxControl.isChecked())
-        {
+        if (displayDateCheckBoxControl.isChecked()) {
             dateFormatTextViewControl.setVisibility(VISIBLE);
             dateFormatSpinnerControl.setVisibility(VISIBLE);
-        }
-        else
-        {
+        } else {
             dateFormatTextViewControl.setVisibility(GONE);
             dateFormatSpinnerControl.setVisibility(GONE);
         }
     }
 
-    public void onClickOk(View view)
-    {
+    public void onClickOk(View view) {
         Log.d(TAG, "onClickOk()");
 
         Context context = getApplicationContext();
 
-        if (!isClientRawUrlPopulated())
-        {
+        if (!isClientRawUrlPopulated()) {
             displayWarningDialog(context.getString(clientRawUrlRequired_message));
-        }
-        else if (!isClientRawUrlProtocolSupported())
-        {
+        } else if (!isClientRawUrlProtocolSupported()) {
             displayWarningDialog(context.getString(clientRawUrlProtocolNotSupported_message));
-        }
-        else if (isStationNameOverridden() && !isStationNamePopulated())
-        {
+        } else if (isStationNameOverridden() && !isStationNamePopulated()) {
             displayWarningDialog(context.getString(stationNameRequired_message));
-        }
-        else
-        {
+        } else {
             Preferences preferences = new Preferences(getApplicationContext());
             String oldClientRawUrl = preferences.getClientRawUrl(appWidgetId);
 
@@ -253,98 +230,81 @@ public class WidgetConfigActivity extends Activity
         }
     }
 
-    private void updatePreferences(Context context)
-    {
+    private void updatePreferences(Context context) {
         Preferences preferences = new Preferences(context);
 
         preferences.setConfigured(appWidgetId, true);
 
-        preferences.setClientRawUrl(appWidgetId, ((EditText)findViewById(clientRawUrlEditText)).getText().toString().trim());
+        preferences.setClientRawUrl(appWidgetId, ((EditText) findViewById(clientRawUrlEditText)).getText().toString().trim());
 
-        if (isStationNameOverridden())
-        {
-            preferences.setStationName(appWidgetId, ((EditText)findViewById(stationNameEditText)).getText().toString().trim());
-        }
-        else
-        {
+        if (isStationNameOverridden()) {
+            preferences.setStationName(appWidgetId, ((EditText) findViewById(stationNameEditText)).getText().toString().trim());
+        } else {
             preferences.removeStationName(appWidgetId);
         }
 
-        preferences.setWeatherItem1(appWidgetId, (WeatherItem)((Spinner)findViewById(weatherItem1Spinner)).getSelectedItem());
-        preferences.setWeatherItem2(appWidgetId, (WeatherItem)((Spinner)findViewById(weatherItem2Spinner)).getSelectedItem());
-        preferences.setWeatherItem3(appWidgetId, (WeatherItem)((Spinner)findViewById(weatherItem3Spinner)).getSelectedItem());
-        preferences.setWeatherItem4(appWidgetId, (WeatherItem)((Spinner)findViewById(weatherItem4Spinner)).getSelectedItem());
-        preferences.setWeatherItem5(appWidgetId, (WeatherItem)((Spinner)findViewById(weatherItem5Spinner)).getSelectedItem());
+        preferences.setWeatherItem1(appWidgetId, (WeatherItem) ((Spinner) findViewById(weatherItem1Spinner)).getSelectedItem());
+        preferences.setWeatherItem2(appWidgetId, (WeatherItem) ((Spinner) findViewById(weatherItem2Spinner)).getSelectedItem());
+        preferences.setWeatherItem3(appWidgetId, (WeatherItem) ((Spinner) findViewById(weatherItem3Spinner)).getSelectedItem());
+        preferences.setWeatherItem4(appWidgetId, (WeatherItem) ((Spinner) findViewById(weatherItem4Spinner)).getSelectedItem());
+        preferences.setWeatherItem5(appWidgetId, (WeatherItem) ((Spinner) findViewById(weatherItem5Spinner)).getSelectedItem());
 
-        preferences.setTemperatureUnit(appWidgetId, (TemperatureUnit)((Spinner)findViewById(temperatureUnitSpinner)).getSelectedItem());
-        preferences.setPressureUnit(appWidgetId, (PressureUnit)((Spinner)findViewById(pressureUnitSpinner)).getSelectedItem());
-        preferences.setWindSpeedUnit(appWidgetId, (WindSpeedUnit)((Spinner)findViewById(windSpeedUnitSpinner)).getSelectedItem());
-        preferences.setWindDirectionUnit(appWidgetId, (WindDirectionUnit)((Spinner)findViewById(windDirectionUnitSpinner)).getSelectedItem());
-        preferences.setRainfallUnit(appWidgetId, (RainfallUnit)((Spinner)findViewById(rainfallUnitSpinner)).getSelectedItem());
+        preferences.setTemperatureUnit(appWidgetId, (TemperatureUnit) ((Spinner) findViewById(temperatureUnitSpinner)).getSelectedItem());
+        preferences.setPressureUnit(appWidgetId, (PressureUnit) ((Spinner) findViewById(pressureUnitSpinner)).getSelectedItem());
+        preferences.setWindSpeedUnit(appWidgetId, (WindSpeedUnit) ((Spinner) findViewById(windSpeedUnitSpinner)).getSelectedItem());
+        preferences.setWindDirectionUnit(appWidgetId, (WindDirectionUnit) ((Spinner) findViewById(windDirectionUnitSpinner)).getSelectedItem());
+        preferences.setRainfallUnit(appWidgetId, (RainfallUnit) ((Spinner) findViewById(rainfallUnitSpinner)).getSelectedItem());
 
-        if (isDateToBeDisplayed())
-        {
-            preferences.setDateFormat(appWidgetId, (DateFormat)((Spinner)findViewById(dateFormatSpinner)).getSelectedItem());
-        }
-        else
-        {
+        if (isDateToBeDisplayed()) {
+            preferences.setDateFormat(appWidgetId, (DateFormat) ((Spinner) findViewById(dateFormatSpinner)).getSelectedItem());
+        } else {
             preferences.removeDateFormat(appWidgetId);
         }
 
-        preferences.setTimeFormat(appWidgetId, (TimeFormat)((Spinner)findViewById(timeFormatSpinner)).getSelectedItem());
+        preferences.setTimeFormat(appWidgetId, (TimeFormat) ((Spinner) findViewById(timeFormatSpinner)).getSelectedItem());
 
-        preferences.setConnectionTimeout(appWidgetId, (Timeout)((Spinner)findViewById(connectionTimeoutSpinner)).getSelectedItem());
-        preferences.setReadTimeout(appWidgetId, (Timeout)((Spinner)findViewById(readTimeoutSpinner)).getSelectedItem());
+        preferences.setConnectionTimeout(appWidgetId, (Timeout) ((Spinner) findViewById(connectionTimeoutSpinner)).getSelectedItem());
+        preferences.setReadTimeout(appWidgetId, (Timeout) ((Spinner) findViewById(readTimeoutSpinner)).getSelectedItem());
 
-        preferences.setTransparent(appWidgetId, ((CheckBox)findViewById(transparentCheckBox)).isChecked());
+        preferences.setTransparent(appWidgetId, ((CheckBox) findViewById(transparentCheckBox)).isChecked());
 
         preferences.commit();
     }
 
-    private boolean isClientRawUrlPopulated()
-    {
-        return ((EditText)findViewById(clientRawUrlEditText)).getText().toString().trim().length() > 0;
+    private boolean isClientRawUrlPopulated() {
+        return ((EditText) findViewById(clientRawUrlEditText)).getText().toString().trim().length() > 0;
     }
 
-    private boolean isClientRawUrlProtocolSupported()
-    {
+    private boolean isClientRawUrlProtocolSupported() {
         // Either no protocol, http or https is supported
         boolean valid = false;
 
-        String clientRawUrl = ((EditText)findViewById(clientRawUrlEditText)).getText().toString().trim();
+        String clientRawUrl = ((EditText) findViewById(clientRawUrlEditText)).getText().toString().trim();
 
-        if (clientRawUrl.contains("://"))
-        {
-            if (clientRawUrl.startsWith("http://") || clientRawUrl.startsWith("https://"))
-            {
+        if (clientRawUrl.contains("://")) {
+            if (clientRawUrl.startsWith("http://") || clientRawUrl.startsWith("https://")) {
                 valid = true;
             }
-        }
-        else
-        {
+        } else {
             valid = true;
         }
 
         return valid;
     }
 
-    private boolean isStationNameOverridden()
-    {
-        return ((CheckBox)findViewById(overrideStationNameCheckBox)).isChecked();
+    private boolean isStationNameOverridden() {
+        return ((CheckBox) findViewById(overrideStationNameCheckBox)).isChecked();
     }
 
-    private boolean isStationNamePopulated()
-    {
-        return ((EditText)findViewById(stationNameEditText)).getText().toString().trim().length() > 0;
+    private boolean isStationNamePopulated() {
+        return ((EditText) findViewById(stationNameEditText)).getText().toString().trim().length() > 0;
     }
 
-    private boolean isDateToBeDisplayed()
-    {
-        return ((CheckBox)findViewById(displayDateCheckBox)).isChecked();
+    private boolean isDateToBeDisplayed() {
+        return ((CheckBox) findViewById(displayDateCheckBox)).isChecked();
     }
 
-    private void displayWarningDialog(String warningMessage)
-    {
+    private void displayWarningDialog(String warningMessage) {
         AlertDialog alertDialog = new AlertDialog.Builder(this).create();
 
         alertDialog.setTitle(app_name);
@@ -358,8 +318,7 @@ public class WidgetConfigActivity extends Activity
         alertDialog.show();
     }
 
-    public void onClickAbout(View view)
-    {
+    public void onClickAbout(View view) {
         Log.d(TAG, "onClickAbout()");
 
         Resources resources = getResources();

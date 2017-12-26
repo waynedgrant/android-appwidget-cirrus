@@ -3,34 +3,27 @@
 
 package com.waynedgrant.cirrus.clientraw;
 
-public class ClientRawUrl
-{
+public class ClientRawUrl {
     private String url;
 
-    public ClientRawUrl(String url)
-    {
+    public ClientRawUrl(String url) {
         this.url = url;
     }
 
-    public String getUrl()
-    {
+    public String getUrl() {
         String correctedUrl = url;
 
-        if (!url.endsWith("/clientraw.txt"))
-        {
-            if (!url.endsWith("/"))
-            {
+        if (!url.endsWith("/clientraw.txt")) {
+            if (!url.endsWith("/")) {
                 correctedUrl += "/";
             }
 
-            if (!url.endsWith("clientraw.txt"))
-            {
+            if (!url.endsWith("clientraw.txt")) {
                 correctedUrl += "clientraw.txt";
             }
         }
 
-        if (!url.contains("://"))
-        {
+        if (!url.contains("://")) {
             correctedUrl = "http://" + correctedUrl;
         }
 

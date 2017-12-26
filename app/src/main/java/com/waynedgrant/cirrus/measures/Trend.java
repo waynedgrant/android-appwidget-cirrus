@@ -3,8 +3,7 @@
 
 package com.waynedgrant.cirrus.measures;
 
-public enum Trend
-{
+public enum Trend {
     RISING,
     STEADY,
     FALLING

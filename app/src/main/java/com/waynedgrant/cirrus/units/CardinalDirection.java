@@ -3,7 +3,6 @@
 
 package com.waynedgrant.cirrus.units;
 
-public enum CardinalDirection
-{
+public enum CardinalDirection {
     N, NNE, NE, ENE, E, ESE, SE, SSE, S, SSW, SW, WSW, W, WNW, NW, NNW
 }

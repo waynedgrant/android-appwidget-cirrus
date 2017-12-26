@@ -3,20 +3,17 @@
 
 package com.waynedgrant.cirrus.presentation.formatters;
 
-public enum TimeFormat
-{
+public enum TimeFormat {
     HOUR_24("24 Hour"),
     HOUR_12("12 Hour");
 
     private String description;
 
-    TimeFormat(String description)
-    {
+    TimeFormat(String description) {
         this.description = description;
     }
 
-    public String toString()
-    {
+    public String toString() {
         return description;
     }
 }

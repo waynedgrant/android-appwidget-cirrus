@@ -5,29 +5,21 @@ package com.waynedgrant.cirrus.presentation.formatters;
 
 import com.waynedgrant.cirrus.measures.Trend;
 
-public class TrendFormatter
-{
+public class TrendFormatter {
     private Trend trend;
 
-    public TrendFormatter(Trend trend)
-    {
+    public TrendFormatter(Trend trend) {
         this.trend = trend;
     }
 
-    public String format()
-    {
+    public String format() {
         String formatted = "-";
 
-        if (trend == Trend.RISING)
-        {
+        if (trend == Trend.RISING) {
             formatted = "\u279A";
-        }
-        else if (trend == Trend.STEADY)
-        {
+        } else if (trend == Trend.STEADY) {
             formatted = "\u279E";
-        }
-        else if (trend == Trend.FALLING)
-        {
+        } else if (trend == Trend.FALLING) {
             formatted = "\u2798";
         }
 

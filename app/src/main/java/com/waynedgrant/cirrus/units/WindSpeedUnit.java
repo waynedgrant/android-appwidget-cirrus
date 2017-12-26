@@ -3,8 +3,7 @@
 
 package com.waynedgrant.cirrus.units;
 
-public enum WindSpeedUnit
-{
+public enum WindSpeedUnit {
     BEAUFORT_SCALE("Beaufort Scale (Bft)"),
     KILOMETRES_PER_HOUR("Kilometres per Hour (km/h)"),
     KNOTS("Knots (kts)"),
@@ -13,13 +12,11 @@ public enum WindSpeedUnit
 
     private String description;
 
-    WindSpeedUnit(String description)
-    {
+    WindSpeedUnit(String description) {
         this.description = description;
     }
 
-    public String toString()
-    {
+    public String toString() {
         return description;
     }
 }

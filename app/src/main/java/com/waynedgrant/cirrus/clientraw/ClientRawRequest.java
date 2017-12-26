@@ -3,24 +3,20 @@
 
 package com.waynedgrant.cirrus.clientraw;
 
-public class ClientRawRequest
-{
+public class ClientRawRequest {
     private int appWidgetId;
     private ClientRawUrl clientRawUrl;
 
-    public ClientRawRequest(int appWidgetId, ClientRawUrl clientRawUrl)
-    {
+    public ClientRawRequest(int appWidgetId, ClientRawUrl clientRawUrl) {
         this.appWidgetId = appWidgetId;
         this.clientRawUrl = clientRawUrl;
     }
 
-    public int getAppWidgetId()
-    {
+    public int getAppWidgetId() {
         return appWidgetId;
     }
 
-    public ClientRawUrl getClientRawUrl()
-    {
+    public ClientRawUrl getClientRawUrl() {
         return clientRawUrl;
     }
 }

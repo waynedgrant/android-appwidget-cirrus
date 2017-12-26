@@ -3,8 +3,7 @@
 
 package com.waynedgrant.cirrus.measures;
 
-public enum WeatherItem
-{
+public enum WeatherItem {
     APPARENT_TEMPERATURE("Apparent Temperature"),
     AVERAGE_WIND("Average Wind"),
     BLANK("Blank"),
@@ -24,13 +23,11 @@ public enum WeatherItem
 
     private String description;
 
-    WeatherItem(String description)
-    {
+    WeatherItem(String description) {
         this.description = description;
     }
 
-    public String toString()
-    {
+    public String toString() {
         return description;
     }
 }

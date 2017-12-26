@@ -11,8 +11,7 @@ import com.waynedgrant.cirrus.units.TemperatureUnit;
 import com.waynedgrant.cirrus.units.WindDirectionUnit;
 import com.waynedgrant.cirrus.units.WindSpeedUnit;
 
-public class WeatherItemFormatter
-{
+public class WeatherItemFormatter {
     private ClientRaw clientRaw;
     private TemperatureUnit temperatureUnit;
     private PressureUnit pressureUnit;
@@ -20,8 +19,7 @@ public class WeatherItemFormatter
     private WindDirectionUnit windDirectionUnit;
     private RainfallUnit rainfallUnit;
 
-    public WeatherItemFormatter(ClientRaw clientRaw, TemperatureUnit temperatureUnit, PressureUnit pressureUnit, WindSpeedUnit windSpeedUnit, WindDirectionUnit windDirectionUnit, RainfallUnit rainfallUnit)
-    {
+    public WeatherItemFormatter(ClientRaw clientRaw, TemperatureUnit temperatureUnit, PressureUnit pressureUnit, WindSpeedUnit windSpeedUnit, WindDirectionUnit windDirectionUnit, RainfallUnit rainfallUnit) {
         this.clientRaw = clientRaw;
         this.temperatureUnit = temperatureUnit;
         this.pressureUnit = pressureUnit;
@@ -30,12 +28,10 @@ public class WeatherItemFormatter
         this.rainfallUnit = rainfallUnit;
     }
 
-    public FormattedWeatherItem format(WeatherItem weatherItem)
-    {
+    public FormattedWeatherItem format(WeatherItem weatherItem) {
         FormattedWeatherItem formattedWeatherItem = null;
 
-        switch (weatherItem)
-        {
+        switch (weatherItem) {
             case APPARENT_TEMPERATURE:
                 formattedWeatherItem = new FormattedWeatherItem("apparent",
                         new TemperatureFormatter(clientRaw.getApparentTemperature()).format(temperatureUnit));
@@ -44,7 +40,7 @@ public class WeatherItemFormatter
             case AVERAGE_WIND:
                 formattedWeatherItem = new FormattedWeatherItem("wind",
                         new WindSpeedFormatter(clientRaw.getAverageWindSpeed()).format(windSpeedUnit) + " " +
-                        new WindDirectionFormatter(clientRaw.getWindDirection()).format(windDirectionUnit));
+                                new WindDirectionFormatter(clientRaw.getWindDirection()).format(windDirectionUnit));
                 break;
 
             case BLANK:
@@ -84,13 +80,13 @@ public class WeatherItemFormatter
             case HUMIDITY:
                 formattedWeatherItem = new FormattedWeatherItem("humidity",
                         new HumidityFormatter(clientRaw.getOutdoorHumidityPercentage()).format() + " " +
-                        new TrendFormatter(clientRaw.getOutdoorHumidityTrend()).format());
+                                new TrendFormatter(clientRaw.getOutdoorHumidityTrend()).format());
                 break;
 
             case INDOOR_CONDITIONS:
                 formattedWeatherItem = new FormattedWeatherItem("indoor",
                         new TemperatureFormatter(clientRaw.getIndoorTemperature()).format(temperatureUnit) + ", " +
-                        new HumidityFormatter(clientRaw.getIndoorHumidityPercentage()).format());
+                                new HumidityFormatter(clientRaw.getIndoorHumidityPercentage()).format());
                 break;
 
             case RAINFALL_RATE:
@@ -101,13 +97,13 @@ public class WeatherItemFormatter
             case SOLAR:
                 formattedWeatherItem = new FormattedWeatherItem("solar",
                         new SolarRadiationFormatter(clientRaw.getSolarRadiation()).format() + ", " +
-                        new SolarPercentageFormatter(clientRaw.getSolarPercentage()).format());
+                                new SolarPercentageFormatter(clientRaw.getSolarPercentage()).format());
                 break;
 
             case SURFACE_PRESSURE:
                 formattedWeatherItem = new FormattedWeatherItem("press",
                         new PressureFormatter(clientRaw.getSurfacePressure()).format(pressureUnit) + " " +
-                        new TrendFormatter(clientRaw.getSurfacePressureTrend()).format());
+                                new TrendFormatter(clientRaw.getSurfacePressureTrend()).format());
                 break;
 
             case UV_INDEX:

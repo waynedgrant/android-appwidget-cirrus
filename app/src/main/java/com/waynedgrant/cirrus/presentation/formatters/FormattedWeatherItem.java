@@ -3,24 +3,20 @@
 
 package com.waynedgrant.cirrus.presentation.formatters;
 
-public class FormattedWeatherItem
-{
+public class FormattedWeatherItem {
     private String label;
     private String value;
 
-    public FormattedWeatherItem(String label, String value)
-    {
+    public FormattedWeatherItem(String label, String value) {
         this.label = label;
         this.value = value;
     }
 
-    public String getLabel()
-    {
+    public String getLabel() {
         return label;
     }
 
-    public String getValue()
-    {
+    public String getValue() {
         return value;
     }
 }

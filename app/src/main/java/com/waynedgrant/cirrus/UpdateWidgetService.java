@@ -76,36 +76,28 @@ import static com.waynedgrant.cirrus.WidgetProvider.ERROR_ACTION;
 import static com.waynedgrant.cirrus.WidgetProvider.ERROR_MESSAGE_EXTRA;
 import static com.waynedgrant.cirrus.WidgetProvider.FETCH_FRESH_CLIENT_RAW;
 
-public class UpdateWidgetService extends Service
-{
+public class UpdateWidgetService extends Service {
     private static final String TAG = "UpdateWidgetService";
 
     @Override
-    public int onStartCommand(Intent intent, int flags, int startId)
-    {
+    public int onStartCommand(Intent intent, int flags, int startId) {
         Log.d(TAG, "onStartCommand()");
 
         int[] appWidgetIds = intent.getIntArrayExtra(EXTRA_APPWIDGET_IDS);
 
-        if (appWidgetIds != null)
-        {
+        if (appWidgetIds != null) {
             Context context = getApplicationContext();
             Preferences preferences = new Preferences(context);
 
-            for (int appWidgetId : appWidgetIds)
-            {
+            for (int appWidgetId : appWidgetIds) {
                 boolean configured = preferences.isConfigured(appWidgetId);
 
-                if (configured)
-                {
+                if (configured) {
                     boolean fetchFreshClientRaw = intent.getBooleanExtra(FETCH_FRESH_CLIENT_RAW, true);
 
-                    if (!fetchFreshClientRaw && ClientRawCache.isCached(appWidgetId))
-                    {
+                    if (!fetchFreshClientRaw && ClientRawCache.isCached(appWidgetId)) {
                         updateDisplayWithCachedClientRaw(appWidgetId, preferences);
-                    }
-                    else
-                    {
+                    } else {
                         requestUpdatedClientRaw(appWidgetId, preferences);
                     }
                 }
@@ -115,8 +107,7 @@ public class UpdateWidgetService extends Service
         return super.onStartCommand(intent, flags, startId);
     }
 
-    private void requestUpdatedClientRaw(int appWidgetId, Preferences preferences)
-    {
+    private void requestUpdatedClientRaw(int appWidgetId, Preferences preferences) {
         Log.d(TAG, "requestUpdatedClientRaw()");
 
         String clientRawUrl = preferences.getClientRawUrl(appWidgetId);
@@ -136,15 +127,13 @@ public class UpdateWidgetService extends Service
     }
 
     @Override
-    public IBinder onBind(Intent intent)
-    {
+    public IBinder onBind(Intent intent) {
         Log.d(TAG, "onBind()");
 
         return null;
     }
 
-    private void updateDisplayWithCachedClientRaw(int appWidgetId, Preferences preferences)
-    {
+    private void updateDisplayWithCachedClientRaw(int appWidgetId, Preferences preferences) {
         Log.d(TAG, "updateDisplayWithCachedClientRaw()");
 
         RemoteViews remoteViews = getRemoteViews();
@@ -158,8 +147,7 @@ public class UpdateWidgetService extends Service
         pushUpdatesToWidget(appWidgetId, remoteViews);
     }
 
-    private void updateDisplay(int appWidgetId, Preferences preferences, RemoteViews remoteViews, ClientRaw clientRaw)
-    {
+    private void updateDisplay(int appWidgetId, Preferences preferences, RemoteViews remoteViews, ClientRaw clientRaw) {
         updateStationNameDisplay(appWidgetId, remoteViews, preferences, clientRaw);
         updateTemperatureDisplay(appWidgetId, remoteViews, preferences, clientRaw);
         updateWeatherItemsDisplay(appWidgetId, remoteViews, preferences, clientRaw);
@@ -167,40 +155,33 @@ public class UpdateWidgetService extends Service
         remoteViews.setViewVisibility(statusImage, INVISIBLE);
     }
 
-    private void updateIntents(int appWidgetId, RemoteViews remoteViews)
-    {
+    private void updateIntents(int appWidgetId, RemoteViews remoteViews) {
         updateClickRefreshIntent(appWidgetId, remoteViews);
         updateClickConfigIntent(appWidgetId, remoteViews);
     }
 
-    public void handleClientRawResponses(List<ClientRawResponse> responses)
-    {
+    public void handleClientRawResponses(List<ClientRawResponse> responses) {
         Log.d(TAG, "handleClientRawResponses()");
 
         Preferences preferences = new Preferences(getApplicationContext());
 
-        for (ClientRawResponse response : responses)
-        {
+        for (ClientRawResponse response : responses) {
             handleClientRawResponse(response, preferences);
         }
 
         stopSelf();
     }
 
-    private void handleClientRawResponse(ClientRawResponse response, Preferences preferences)
-    {
+    private void handleClientRawResponse(ClientRawResponse response, Preferences preferences) {
         int appWidgetId = response.getAppWidgetId();
         RemoteViews remoteViews = getRemoteViews();
 
         ClientRaw clientRaw = response.getClientRaw();
 
-        if (clientRaw == null)
-        {
+        if (clientRaw == null) {
             String errorMessage = response.getErrorMessage();
             updateStatusToDisplayError(appWidgetId, remoteViews, errorMessage);
-        }
-        else
-        {
+        } else {
             ClientRawCache.update(appWidgetId, clientRaw);
             updateDisplay(appWidgetId, preferences, remoteViews, clientRaw);
         }
@@ -211,33 +192,28 @@ public class UpdateWidgetService extends Service
         pushUpdatesToWidget(appWidgetId, remoteViews);
     }
 
-    private RemoteViews getRemoteViews()
-    {
+    private RemoteViews getRemoteViews() {
         return new RemoteViews(getApplicationContext().getPackageName(), widget_layout);
     }
 
-    private void updateBackground(int appWidgetId, RemoteViews remoteViews, Preferences preferences)
-    {
+    private void updateBackground(int appWidgetId, RemoteViews remoteViews, Preferences preferences) {
         int drawable = widget_shape_opaque;
 
-        if (preferences.isTransparent(appWidgetId))
-        {
+        if (preferences.isTransparent(appWidgetId)) {
             drawable = widget_shape_transparent;
         }
 
         remoteViews.setInt(mainWidgetLayout, "setBackgroundResource", drawable);
     }
 
-    private void updateStatusToDisplayRefreshing(RemoteViews remoteViews)
-    {
+    private void updateStatusToDisplayRefreshing(RemoteViews remoteViews) {
         remoteViews.setImageViewResource(statusImage, refreshing);
         remoteViews.setViewVisibility(statusImage, VISIBLE);
 
         remoteViews.setOnClickPendingIntent(statusImage, null);
     }
 
-    private void updateStatusToDisplayError(int appWidgetId, RemoteViews remoteViews, String errorMessage)
-    {
+    private void updateStatusToDisplayError(int appWidgetId, RemoteViews remoteViews, String errorMessage) {
         remoteViews.setImageViewResource(statusImage, error);
         remoteViews.setViewVisibility(statusImage, VISIBLE);
 
@@ -252,8 +228,7 @@ public class UpdateWidgetService extends Service
         remoteViews.setOnClickPendingIntent(statusImage, errorPendingIntent);
     }
 
-    private void updateClickRefreshIntent(int appWidgetId, RemoteViews remoteViews)
-    {
+    private void updateClickRefreshIntent(int appWidgetId, RemoteViews remoteViews) {
         Context context = getApplicationContext();
         Intent clickRefreshIntent = new Intent(context, WidgetProvider.class);
         clickRefreshIntent.setAction(ACTION_APPWIDGET_UPDATE);
@@ -280,8 +255,7 @@ public class UpdateWidgetService extends Service
         remoteViews.setOnClickPendingIntent(whenRefreshed, refreshPendingIntent);
     }
 
-    private void updateClickConfigIntent(int appWidgetId, RemoteViews remoteViews)
-    {
+    private void updateClickConfigIntent(int appWidgetId, RemoteViews remoteViews) {
         Context context = getApplicationContext();
         Intent clickConfigIntent = new Intent(context, WidgetConfigActivity.class);
         clickConfigIntent.putExtra(EXTRA_APPWIDGET_ID, appWidgetId);
@@ -291,12 +265,10 @@ public class UpdateWidgetService extends Service
         remoteViews.setOnClickPendingIntent(configButton, configPendingIntent);
     }
 
-    private void updateStationNameDisplay(int appWidgetId, RemoteViews remoteViews, Preferences preferences, ClientRaw clientRaw)
-    {
+    private void updateStationNameDisplay(int appWidgetId, RemoteViews remoteViews, Preferences preferences, ClientRaw clientRaw) {
         String stationNameValue = preferences.getStationName(appWidgetId);
 
-        if (stationNameValue == null)
-        {
+        if (stationNameValue == null) {
             stationNameValue = clientRaw.getStationName();
         }
 
@@ -305,8 +277,7 @@ public class UpdateWidgetService extends Service
         remoteViews.setTextViewText(stationName, stationNameValue);
     }
 
-    private void updateTemperatureDisplay(int appWidgetId, RemoteViews remoteViews, Preferences preferences, ClientRaw clientRaw)
-    {
+    private void updateTemperatureDisplay(int appWidgetId, RemoteViews remoteViews, Preferences preferences, ClientRaw clientRaw) {
         TemperatureUnit temperatureUnit = preferences.getTemperatureUnit(appWidgetId);
 
         Temperature dailyMaxOutdoorTemperatureValue = clientRaw.getDailyMaxOutdoorTemperature();
@@ -326,8 +297,7 @@ public class UpdateWidgetService extends Service
         remoteViews.setTextViewText(outdoorTemperatureTrend, new TrendFormatter(outdoorTemperatureTrendValue).format());
     }
 
-    private void updateWeatherItemsDisplay(int appWidgetId, RemoteViews remoteViews, Preferences preferences, ClientRaw clientRaw)
-    {
+    private void updateWeatherItemsDisplay(int appWidgetId, RemoteViews remoteViews, Preferences preferences, ClientRaw clientRaw) {
         TemperatureUnit temperatureUnit = preferences.getTemperatureUnit(appWidgetId);
         PressureUnit pressureUnit = preferences.getPressureUnit(appWidgetId);
         WindSpeedUnit windSpeedUnit = preferences.getWindSpeedUnit(appWidgetId);
@@ -346,8 +316,7 @@ public class UpdateWidgetService extends Service
         updateWeatherItemDisplay(remoteViews, preferences.getWeatherItem5(appWidgetId), weatherItemFormatter, weatherItemColorizer, weatherItemLabel5, weatherItemValue5);
     }
 
-    private void updateWeatherItemDisplay(RemoteViews remoteViews, WeatherItem weatherItem, WeatherItemFormatter weatherItemFormatter, WeatherItemColorizer weatherItemColorizer, int weatherItemLabelId, int weatherItemValueId)
-    {
+    private void updateWeatherItemDisplay(RemoteViews remoteViews, WeatherItem weatherItem, WeatherItemFormatter weatherItemFormatter, WeatherItemColorizer weatherItemColorizer, int weatherItemLabelId, int weatherItemValueId) {
         FormattedWeatherItem formattedWeatherItem = weatherItemFormatter.format(weatherItem);
 
         remoteViews.setTextViewText(weatherItemLabelId, formattedWeatherItem.getLabel());
@@ -355,8 +324,7 @@ public class UpdateWidgetService extends Service
         remoteViews.setTextColor(weatherItemValueId, weatherItemColorizer.colorize(weatherItem));
     }
 
-    private void updateWhenRefreshedDisplay(int appWidgetId, RemoteViews remoteViews, Preferences preferences, ClientRaw clientRaw)
-    {
+    private void updateWhenRefreshedDisplay(int appWidgetId, RemoteViews remoteViews, Preferences preferences, ClientRaw clientRaw) {
         TimeFormat timeFormat = preferences.getTimeFormat(appWidgetId);
         String timeRefreshed = new TimeFormatter(clientRaw.getHour(), clientRaw.getMinute()).format(timeFormat);
 
@@ -373,8 +341,7 @@ public class UpdateWidgetService extends Service
         remoteViews.setTextViewText(whenRefreshed, whenRefreshedValue);
     }
 
-    private void pushUpdatesToWidget(int appWidgetId, RemoteViews remoteViews)
-    {
+    private void pushUpdatesToWidget(int appWidgetId, RemoteViews remoteViews) {
         AppWidgetManager.getInstance(getApplicationContext()).updateAppWidget(appWidgetId, remoteViews);
     }
 }

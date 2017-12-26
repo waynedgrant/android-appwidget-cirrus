@@ -3,21 +3,17 @@
 
 package com.waynedgrant.cirrus.presentation.formatters;
 
-public class StringFormatter
-{
+public class StringFormatter {
     private String string;
 
-    public StringFormatter(String string)
-    {
+    public StringFormatter(String string) {
         this.string = string;
     }
 
-    public String format()
-    {
+    public String format() {
         String formatted = "-----";
 
-        if (string != null)
-        {
+        if (string != null) {
             formatted = string;
         }
 

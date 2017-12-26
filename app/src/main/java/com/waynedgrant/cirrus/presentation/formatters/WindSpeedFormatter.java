@@ -15,69 +15,44 @@ import static com.waynedgrant.cirrus.units.WindSpeedUnit.KNOTS;
 import static com.waynedgrant.cirrus.units.WindSpeedUnit.METRES_PER_SECOND;
 import static com.waynedgrant.cirrus.units.WindSpeedUnit.MILES_PER_HOUR;
 
-public class WindSpeedFormatter
-{
+public class WindSpeedFormatter {
     private WindSpeed windSpeed;
 
-    public WindSpeedFormatter(WindSpeed windSpeed)
-    {
+    public WindSpeedFormatter(WindSpeed windSpeed) {
         this.windSpeed = windSpeed;
     }
 
-    public String format(WindSpeedUnit unit)
-    {
+    public String format(WindSpeedUnit unit) {
         String formatted = null;
 
-        if (windSpeed != null)
-        {
+        if (windSpeed != null) {
             String formatString;
 
-            if (unit == BEAUFORT_SCALE)
-            {
+            if (unit == BEAUFORT_SCALE) {
                 formatted = String.format(Locale.US, "%1d Bft", windSpeed.getValue(unit).intValue());
-            }
-            else
-            {
-                if (unit == KNOTS)
-                {
+            } else {
+                if (unit == KNOTS) {
                     formatString = "%1.1f kts";
-                }
-                else if (unit == METRES_PER_SECOND)
-                {
+                } else if (unit == METRES_PER_SECOND) {
                     formatString = "%1.1f m/s";
-                }
-                else if (unit == KILOMETRES_PER_HOUR)
-                {
+                } else if (unit == KILOMETRES_PER_HOUR) {
                     formatString = "%1.1f km/h";
-                }
-                else
-                {
+                } else {
                     formatString = "%1.1f mph";
                 }
 
                 formatted = String.format(Locale.US, formatString, windSpeed.getValue(unit).setScale(1, RoundingMode.HALF_DOWN));
             }
-        }
-        else
-        {
-            if (unit == KNOTS)
-            {
+        } else {
+            if (unit == KNOTS) {
                 formatted = "--.- kts";
-            }
-            else if (unit == METRES_PER_SECOND)
-            {
+            } else if (unit == METRES_PER_SECOND) {
                 formatted = "--.- m/s";
-            }
-            else if (unit == KILOMETRES_PER_HOUR)
-            {
+            } else if (unit == KILOMETRES_PER_HOUR) {
                 formatted = "--.- km/h";
-            }
-            else if (unit == MILES_PER_HOUR)
-            {
+            } else if (unit == MILES_PER_HOUR) {
                 formatted = "--.- mph";
-            }
-            else if (unit == BEAUFORT_SCALE)
-            {
+            } else if (unit == BEAUFORT_SCALE) {
                 formatted = "-- Bft";
             }
         }

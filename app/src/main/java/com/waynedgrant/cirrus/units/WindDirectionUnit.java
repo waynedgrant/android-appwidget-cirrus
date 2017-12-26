@@ -3,20 +3,17 @@
 
 package com.waynedgrant.cirrus.units;
 
-public enum WindDirectionUnit
-{
+public enum WindDirectionUnit {
     CARDINAL_DIRECTION("Cardinal Direction"),
     COMPASS_DEGREES("Compass Degrees");
 
     private String description;
 
-    WindDirectionUnit(String description)
-    {
+    WindDirectionUnit(String description) {
         this.description = description;
     }
 
-    public String toString()
-    {
+    public String toString() {
         return description;
     }
 }

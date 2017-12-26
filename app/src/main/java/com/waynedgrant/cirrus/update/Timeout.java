@@ -3,8 +3,7 @@
 
 package com.waynedgrant.cirrus.update;
 
-public enum Timeout
-{
+public enum Timeout {
     NONE("None", 0),
     FIVE_SECONDS("5 Seconds", 5000),
     TEN_SECONDS("10 Seconds", 10000),
@@ -14,19 +13,16 @@ public enum Timeout
     private String description;
     private int timeoutMsecs;
 
-    Timeout(String description, int timeoutMsecs)
-    {
+    Timeout(String description, int timeoutMsecs) {
         this.description = description;
         this.timeoutMsecs = timeoutMsecs;
     }
 
-    public int getTimeoutMsecs()
-    {
+    public int getTimeoutMsecs() {
         return timeoutMsecs;
     }
 
-    public String toString()
-    {
+    public String toString() {
         return description;
     }
 }

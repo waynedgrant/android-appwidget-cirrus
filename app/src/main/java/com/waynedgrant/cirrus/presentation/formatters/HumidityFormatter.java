@@ -5,21 +5,17 @@ package com.waynedgrant.cirrus.presentation.formatters;
 
 import java.util.Locale;
 
-public class HumidityFormatter
-{
+public class HumidityFormatter {
     private Integer humidityPercentage;
 
-    public HumidityFormatter(Integer humidityPercentage)
-    {
+    public HumidityFormatter(Integer humidityPercentage) {
         this.humidityPercentage = humidityPercentage;
     }
 
-    public String format()
-    {
+    public String format() {
         String formatted = "--%";
 
-        if (humidityPercentage != null)
-        {
+        if (humidityPercentage != null) {
             formatted = String.format(Locale.US, "%1d%%", humidityPercentage);
         }
 

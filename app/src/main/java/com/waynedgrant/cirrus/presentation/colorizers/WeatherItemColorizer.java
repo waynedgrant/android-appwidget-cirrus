@@ -6,23 +6,19 @@ package com.waynedgrant.cirrus.presentation.colorizers;
 import com.waynedgrant.cirrus.clientraw.ClientRaw;
 import com.waynedgrant.cirrus.measures.WeatherItem;
 
-public class WeatherItemColorizer
-{
+public class WeatherItemColorizer {
     static final int WHITE = 0xffffffff;
 
     private ClientRaw clientRaw;
 
-    public WeatherItemColorizer(ClientRaw clientRaw)
-    {
+    public WeatherItemColorizer(ClientRaw clientRaw) {
         this.clientRaw = clientRaw;
     }
 
-    public int colorize(WeatherItem weatherItem)
-    {
+    public int colorize(WeatherItem weatherItem) {
         int colorCode;
 
-        switch (weatherItem)
-        {
+        switch (weatherItem) {
             case APPARENT_TEMPERATURE:
                 colorCode = new TemperatureColorizer(clientRaw.getApparentTemperature()).colorize();
                 break;

@@ -5,21 +5,17 @@ package com.waynedgrant.cirrus.presentation.formatters;
 
 import java.util.Locale;
 
-public class SolarPercentageFormatter
-{
+public class SolarPercentageFormatter {
     private Integer solarPercentage;
 
-    public SolarPercentageFormatter(Integer solarPercentage)
-    {
+    public SolarPercentageFormatter(Integer solarPercentage) {
         this.solarPercentage = solarPercentage;
     }
 
-    public String format()
-    {
+    public String format() {
         String formatted = "--%";
 
-        if (solarPercentage != null)
-        {
+        if (solarPercentage != null) {
             formatted = String.format(Locale.US, "%1d%%", solarPercentage);
         }
 

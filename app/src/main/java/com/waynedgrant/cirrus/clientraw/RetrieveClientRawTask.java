@@ -22,8 +22,7 @@ import java.util.List;
 
 import static android.content.Context.CONNECTIVITY_SERVICE;
 
-public class RetrieveClientRawTask extends AsyncTask<ClientRawRequest, Void, List<ClientRawResponse>>
-{
+public class RetrieveClientRawTask extends AsyncTask<ClientRawRequest, Void, List<ClientRawResponse>> {
     private static final String TAG = "RetrieveClientRawTask";
 
     private static final int MAX_FETCH_CLIENT_RAW_ATTEMPTS = 3;
@@ -35,39 +34,30 @@ public class RetrieveClientRawTask extends AsyncTask<ClientRawRequest, Void, Lis
     private int connectTimeoutMs;
     private int readTimeoutMs;
 
-    public RetrieveClientRawTask(UpdateWidgetService updateWidgetService, int connectTimeoutMs, int readTimeoutMs)
-    {
+    public RetrieveClientRawTask(UpdateWidgetService updateWidgetService, int connectTimeoutMs, int readTimeoutMs) {
         this.updateWidgetService = updateWidgetService;
         this.connectTimeoutMs = connectTimeoutMs;
         this.readTimeoutMs = readTimeoutMs;
     }
 
-    protected List<ClientRawResponse> doInBackground(ClientRawRequest... requests)
-    {
+    protected List<ClientRawResponse> doInBackground(ClientRawRequest... requests) {
         Log.d(TAG, "doInBackground()");
 
         List<ClientRawResponse> responses = new ArrayList<ClientRawResponse>();
 
-        for (ClientRawRequest request : requests)
-        {
+        for (ClientRawRequest request : requests) {
             int appWidgetId = request.getAppWidgetId();
             ClientRawUrl clientRawUrl = request.getClientRawUrl();
 
             ClientRawResponse response;
 
-            if (!whileNotOnlineRetryCheck(isOnline()))
-            {
+            if (!whileNotOnlineRetryCheck(isOnline())) {
                 response = new ClientRawResponse(appWidgetId, "Not online");
-            }
-            else
-            {
-                try
-                {
+            } else {
+                try {
                     ClientRaw clientRaw = whileClientRawEmptyRetryFetch(clientRawUrl, fetchClientRaw(clientRawUrl));
                     response = handleClientRaw(appWidgetId, clientRaw);
-                }
-                catch (IOException ex)
-                {
+                } catch (IOException ex) {
                     response = handleException(appWidgetId, ex);
                 }
             }
@@ -78,14 +68,12 @@ public class RetrieveClientRawTask extends AsyncTask<ClientRawRequest, Void, Lis
         return responses;
     }
 
-    private ClientRaw whileClientRawEmptyRetryFetch(ClientRawUrl clientRawUrl, ClientRaw clientRaw) throws IOException
-    {
+    private ClientRaw whileClientRawEmptyRetryFetch(ClientRawUrl clientRawUrl, ClientRaw clientRaw) throws IOException {
         /* clientraw.txt may have been being written to on the server-side when we read.
            This results in an empty file being returned in which case we try fetching again */
         int fetchClientRawAttempts = 1;
 
-        while (clientRaw.isEmpty() && fetchClientRawAttempts <= MAX_FETCH_CLIENT_RAW_ATTEMPTS)
-        {
+        while (clientRaw.isEmpty() && fetchClientRawAttempts <= MAX_FETCH_CLIENT_RAW_ATTEMPTS) {
             waitFor(WAIT_BETWEEN_FETCH_CLIENT_RAW_ATTEMPTS_MSECS);
 
             Log.d(TAG, String.format("Fetched clientraw.txt is empty, attempting retry %s of %d",
@@ -98,8 +86,7 @@ public class RetrieveClientRawTask extends AsyncTask<ClientRawRequest, Void, Lis
         return clientRaw;
     }
 
-    private ClientRaw fetchClientRaw(ClientRawUrl clientRawUrl) throws IOException
-    {
+    private ClientRaw fetchClientRaw(ClientRawUrl clientRawUrl) throws IOException {
         Log.d(TAG, String.format("Fetching clientraw.txt from %s", clientRawUrl));
 
         ClientRaw clientRaw;
@@ -110,39 +97,29 @@ public class RetrieveClientRawTask extends AsyncTask<ClientRawRequest, Void, Lis
 
         BufferedInputStream reader = null;
 
-        try
-        {
+        try {
             reader = new BufferedInputStream(connection.getInputStream());
             clientRaw = ClientRaw.getInstance(reader);
-        }
-        finally
-        {
-            if (reader != null)
-            {
+        } finally {
+            if (reader != null) {
                 reader.close();
             }
         }
         return clientRaw;
     }
 
-    private ClientRawResponse handleClientRaw(int appWidgetId, ClientRaw clientRaw) throws IOException
-    {
+    private ClientRawResponse handleClientRaw(int appWidgetId, ClientRaw clientRaw) throws IOException {
         ClientRawResponse response;
 
-        if (clientRaw.isEmpty())
-        {
+        if (clientRaw.isEmpty()) {
             String errorMessage = "Empty clientraw.txt received";
             Log.d(TAG, errorMessage);
             response = new ClientRawResponse(appWidgetId, errorMessage);
-        }
-        else if (!clientRaw.isValid())
-        {
+        } else if (!clientRaw.isValid()) {
             String errorMessage = "Invalid clientraw.txt received";
             Log.d(TAG, errorMessage);
             response = new ClientRawResponse(appWidgetId, errorMessage);
-        }
-        else
-        {
+        } else {
             Log.d(TAG, "Valid clientraw.txt received");
             response = new ClientRawResponse(appWidgetId, clientRaw);
         }
@@ -150,50 +127,36 @@ public class RetrieveClientRawTask extends AsyncTask<ClientRawRequest, Void, Lis
         return response;
     }
 
-    private void waitFor(long waitTimeMsecs)
-    {
-        try
-        {
+    private void waitFor(long waitTimeMsecs) {
+        try {
             Thread.sleep(waitTimeMsecs);
-        }
-        catch (InterruptedException ex)
-        {
+        } catch (InterruptedException ex) {
             // Ignore
         }
     }
 
-    private ClientRawResponse handleException(int appWidgetId, IOException exception)
-    {
+    private ClientRawResponse handleException(int appWidgetId, IOException exception) {
         Log.e(TAG, "Exception occurred when fetching clientraw.txt", exception);
 
         ClientRawResponse response;
 
-        if (exception instanceof SocketTimeoutException)
-        {
+        if (exception instanceof SocketTimeoutException) {
             response = new ClientRawResponse(appWidgetId, "Connection timed out");
-        }
-        else if (exception instanceof FileNotFoundException)
-        {
+        } else if (exception instanceof FileNotFoundException) {
             response = new ClientRawResponse(appWidgetId, "clientraw.txt not found");
-        }
-        else if (exception instanceof UnknownHostException)
-        {
+        } else if (exception instanceof UnknownHostException) {
             response = new ClientRawResponse(appWidgetId, "Unknown host");
-        }
-        else
-        {
+        } else {
             response = new ClientRawResponse(appWidgetId, "Connection issue");
         }
 
         return response;
     }
 
-    private boolean whileNotOnlineRetryCheck(boolean isOnline)
-    {
+    private boolean whileNotOnlineRetryCheck(boolean isOnline) {
         int isOnlineAttempts = 1;
 
-        while (!isOnline && isOnlineAttempts <= MAX_IS_ONLINE_ATTEMPTS)
-        {
+        while (!isOnline && isOnlineAttempts <= MAX_IS_ONLINE_ATTEMPTS) {
             waitFor(MAX_WAIT_BETWEEN_IS_ONLINE_ATTEMPTS_MSECS);
 
             Log.d(TAG, String.format("Not online, attempting retry of online check %s of %d",
@@ -206,12 +169,11 @@ public class RetrieveClientRawTask extends AsyncTask<ClientRawRequest, Void, Lis
         return isOnline;
     }
 
-    private boolean isOnline()
-    {
+    private boolean isOnline() {
         Log.d(TAG, "Checking if device is online");
 
         ConnectivityManager connectivityManager =
-                (ConnectivityManager)updateWidgetService.getApplicationContext().getSystemService(CONNECTIVITY_SERVICE);
+                (ConnectivityManager) updateWidgetService.getApplicationContext().getSystemService(CONNECTIVITY_SERVICE);
 
         NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
 
@@ -224,8 +186,7 @@ public class RetrieveClientRawTask extends AsyncTask<ClientRawRequest, Void, Lis
         return isOnline;
     }
 
-    protected void onPostExecute(List<ClientRawResponse> responses)
-    {
+    protected void onPostExecute(List<ClientRawResponse> responses) {
         Log.d(TAG, "onPostExecute()");
 
         updateWidgetService.handleClientRawResponses(responses);

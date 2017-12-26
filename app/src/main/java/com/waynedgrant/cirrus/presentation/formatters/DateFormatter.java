@@ -7,46 +7,32 @@ import java.util.Locale;
 
 import static com.waynedgrant.cirrus.presentation.formatters.DateFormat.YYYY_MM_DD;
 
-public class DateFormatter
-{
+public class DateFormatter {
     private Integer year;
     private Integer month;
     private Integer day;
 
-    public DateFormatter(Integer year, Integer month, Integer day)
-    {
+    public DateFormatter(Integer year, Integer month, Integer day) {
         this.year = year;
         this.month = month;
         this.day = day;
     }
 
-    public String format(DateFormat dateFormat)
-    {
+    public String format(DateFormat dateFormat) {
         String formatted;
 
-        if (year != null && month != null && day != null)
-        {
-            if (dateFormat == YYYY_MM_DD)
-            {
+        if (year != null && month != null && day != null) {
+            if (dateFormat == YYYY_MM_DD) {
                 formatted = String.format(Locale.US, "%1$04d/%2$02d/%3$02d", year, month, day);
-            }
-            else if (dateFormat == DateFormat.DD_MM_YYYY)
-            {
+            } else if (dateFormat == DateFormat.DD_MM_YYYY) {
                 formatted = String.format(Locale.US, "%1$02d/%2$02d/%3$04d", day, month, year);
-            }
-            else
-            {
+            } else {
                 formatted = String.format(Locale.US, "%1$02d/%2$02d/%3$04d", month, day, year);
             }
-        }
-        else
-        {
-            if (dateFormat == YYYY_MM_DD)
-            {
+        } else {
+            if (dateFormat == YYYY_MM_DD) {
                 formatted = "----/--/--";
-            }
-            else
-            {
+            } else {
                 formatted = "--/--/----";
             }
         }

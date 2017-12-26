@@ -14,72 +14,48 @@ import static com.waynedgrant.cirrus.units.PressureUnit.INCHES_OF_MERCURY;
 import static com.waynedgrant.cirrus.units.PressureUnit.KILIOPASCALS;
 import static com.waynedgrant.cirrus.units.PressureUnit.MILLIBARS;
 
-public class PressureFormatter
-{
+public class PressureFormatter {
     private Pressure pressure;
 
-    public PressureFormatter(Pressure pressure)
-    {
+    public PressureFormatter(Pressure pressure) {
         this.pressure = pressure;
     }
 
-    public String format(PressureUnit unit)
-    {
+    public String format(PressureUnit unit) {
         String formatted;
 
-        if (pressure != null)
-        {
+        if (pressure != null) {
             String formatString;
             int scale;
 
-            if (unit == HECTOPASCALS)
-            {
+            if (unit == HECTOPASCALS) {
                 formatString = "%1.1f hPa";
                 scale = 1;
-            }
-            else if (unit == MILLIBARS)
-            {
+            } else if (unit == MILLIBARS) {
                 formatString = "%1.1f mb";
                 scale = 1;
-            }
-            else if (unit == KILIOPASCALS)
-            {
+            } else if (unit == KILIOPASCALS) {
                 formatString = "%1.2f kPa";
                 scale = 2;
-            }
-            else if (unit == INCHES_OF_MERCURY)
-            {
+            } else if (unit == INCHES_OF_MERCURY) {
                 formatString = "%1.2f inHg";
                 scale = 2;
-            }
-            else
-            {
+            } else {
                 formatString = "%1.1f mmHg";
                 scale = 1;
             }
 
             formatted = String.format(Locale.US, formatString, pressure.getValue(unit).setScale(scale, RoundingMode.HALF_DOWN));
-        }
-        else
-        {
-            if (unit == HECTOPASCALS)
-            {
+        } else {
+            if (unit == HECTOPASCALS) {
                 formatted = "----.- hPa";
-            }
-            else if (unit == MILLIBARS)
-            {
+            } else if (unit == MILLIBARS) {
                 formatted = "----.- mb";
-            }
-            else if (unit == KILIOPASCALS)
-            {
+            } else if (unit == KILIOPASCALS) {
                 formatted = "---.-- kPa";
-            }
-            else if (unit == INCHES_OF_MERCURY)
-            {
+            } else if (unit == INCHES_OF_MERCURY) {
                 formatted = "--.-- inHg";
-            }
-            else
-            {
+            } else {
                 formatted = "---.- mmHg";
             }
         }

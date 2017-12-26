@@ -5,24 +5,20 @@ package com.waynedgrant.cirrus.measures;
 
 import com.waynedgrant.cirrus.units.CardinalDirection;
 
-public class WindDirection
-{
+public class WindDirection {
     private Integer compassDegrees;
     private CardinalDirection cardinalDirection;
-    
-    public WindDirection(Integer degrees)
-    {
+
+    public WindDirection(Integer degrees) {
         this.compassDegrees = degrees;
-        this.cardinalDirection = CardinalDirection.values()[(int)(((degrees + 11) / 22.5) % 16)];
+        this.cardinalDirection = CardinalDirection.values()[(int) (((degrees + 11) / 22.5) % 16)];
     }
-    
-    public Integer getCompassDegrees()
-    {
+
+    public Integer getCompassDegrees() {
         return compassDegrees;
     }
-    
-    public CardinalDirection getCardinalDirection()
-    {
+
+    public CardinalDirection getCardinalDirection() {
         return cardinalDirection;
     }
 }

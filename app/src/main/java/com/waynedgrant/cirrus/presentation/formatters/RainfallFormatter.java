@@ -11,42 +11,30 @@ import java.util.Locale;
 
 import static com.waynedgrant.cirrus.units.RainfallUnit.MILLIMETRES;
 
-public class RainfallFormatter
-{
+public class RainfallFormatter {
     private Rainfall rainfall;
 
-    public RainfallFormatter(Rainfall rainfall)
-    {
+    public RainfallFormatter(Rainfall rainfall) {
         this.rainfall = rainfall;
     }
 
-    public String format(RainfallUnit unit)
-    {
+    public String format(RainfallUnit unit) {
         String formatted;
 
-        if (rainfall != null)
-        {
+        if (rainfall != null) {
             String formatString;
 
-            if (unit == MILLIMETRES)
-            {
+            if (unit == MILLIMETRES) {
                 formatString = "%1.2f mm";
-            }
-            else
-            {
+            } else {
                 formatString = "%1.2f in";
             }
 
             formatted = String.format(Locale.US, formatString, rainfall.getValue(unit).setScale(2, RoundingMode.HALF_DOWN));
-        }
-        else
-        {
-            if (unit == MILLIMETRES)
-            {
+        } else {
+            if (unit == MILLIMETRES) {
                 formatted = "-.-- mm";
-            }
-            else
-            {
+            } else {
                 formatted = "-.-- in";
             }
         }

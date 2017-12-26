@@ -5,21 +5,17 @@ package com.waynedgrant.cirrus.presentation.formatters;
 
 import com.waynedgrant.cirrus.measures.Conditions;
 
-public class ConditionsFormatter
-{
+public class ConditionsFormatter {
     private Conditions conditions;
 
-    public ConditionsFormatter(Conditions conditions)
-    {
+    public ConditionsFormatter(Conditions conditions) {
         this.conditions = conditions;
     }
 
-    public String format()
-    {
+    public String format() {
         String formatted = "-";
 
-        if (conditions != null)
-        {
+        if (conditions != null) {
             formatted = conditions.getDescription();
         }
 

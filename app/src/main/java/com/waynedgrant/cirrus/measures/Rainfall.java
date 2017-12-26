@@ -9,27 +9,27 @@ import java.math.BigDecimal;
 
 import static java.math.MathContext.DECIMAL32;
 
-public class Rainfall
-{
+public class Rainfall {
     private BigDecimal millimetres;
     private BigDecimal inches;
-    
-    public Rainfall(BigDecimal millimetres)
-    {
+
+    public Rainfall(BigDecimal millimetres) {
         this.millimetres = millimetres;
         this.inches = this.millimetres.multiply(new BigDecimal("1").divide(new BigDecimal("25.4"), DECIMAL32));
     }
-    
-    public BigDecimal getValue(RainfallUnit unit)
-    {
+
+    public BigDecimal getValue(RainfallUnit unit) {
         BigDecimal value = null;
-        
-        switch(unit)
-        {
-            case MILLIMETRES: value = millimetres; break;
-            case INCHES: value = inches; break;
+
+        switch (unit) {
+            case MILLIMETRES:
+                value = millimetres;
+                break;
+            case INCHES:
+                value = inches;
+                break;
         }
-        
+
         return value;
     }
 }

@@ -3,8 +3,7 @@
 
 package com.waynedgrant.cirrus.units;
 
-public enum PressureUnit
-{
+public enum PressureUnit {
     HECTOPASCALS("Hectopascals (hPa)"),
     INCHES_OF_MERCURY("Inches of Mercury (inHg)"),
     KILIOPASCALS("Kilopascals (kPa)"),
@@ -13,13 +12,11 @@ public enum PressureUnit
 
     private String description;
 
-    PressureUnit(String description)
-    {
+    PressureUnit(String description) {
         this.description = description;
     }
 
-    public String toString()
-    {
+    public String toString() {
         return description;
     }
 }

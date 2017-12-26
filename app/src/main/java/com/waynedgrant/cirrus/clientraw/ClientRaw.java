@@ -17,8 +17,7 @@ import java.io.InputStreamReader;
 import java.io.LineNumberReader;
 import java.math.BigDecimal;
 
-public class ClientRaw
-{
+public class ClientRaw {
     public static final String VALID_HEADER_VALUE = "12345";
     public static final int HEADER = 0;
     public static final int AVERAGE_WIND_SPEED_KNOTS = 1;
@@ -55,450 +54,363 @@ public class ClientRaw
     public static final int OUTDOOR_HUMIDITY_TREND = 144;
     public static final int LATITUDE_DECIMAL_DEGREES = 160;
     public static final int LONGITUDE_DECIMAL_DEGREES = 161;
-    
+
     private String[] fields;
-    
-    private ClientRaw(String[] fields)
-    {
+
+    private ClientRaw(String[] fields) {
         this.fields = fields;
     }
-    
-    public static ClientRaw getInstance(InputStream is) throws IOException
-    {                
+
+    public static ClientRaw getInstance(InputStream is) throws IOException {
         LineNumberReader lnr = null;
-        String[] fields = {}; 
-        
-        try
-        {
+        String[] fields = {};
+
+        try {
             lnr = new LineNumberReader(new InputStreamReader(is));
             String line = lnr.readLine();
-            
-            if (line != null && line.length() > 0)
-            {
+
+            if (line != null && line.length() > 0) {
                 fields = line.split(" ");
             }
-        }
-        finally
-        {
-            if (lnr != null)
-            {
+        } finally {
+            if (lnr != null) {
                 lnr.close();
             }
         }
-        
+
         return new ClientRaw(fields);
     }
-    
-    public boolean isEmpty()
-    {
+
+    public boolean isEmpty() {
         return fields.length == 0;
     }
 
-    public boolean isValid()
-    {
+    public boolean isValid() {
         boolean isValid = false;
-        
+
         String header = getHeader();
-        
-        if (header != null && header.equals(VALID_HEADER_VALUE))
-        {
+
+        if (header != null && header.equals(VALID_HEADER_VALUE)) {
             isValid = true;
         }
-         
+
         return isValid;
     }
-    
-    public String getHeader()
-    {
+
+    public String getHeader() {
         return getFieldValueAsString(HEADER);
     }
-    
-    public WindSpeed getAverageWindSpeed()
-    {
-        return getFieldValueAsWindSpeed(AVERAGE_WIND_SPEED_KNOTS);
-    }    
 
-    public WindSpeed getGustSpeed()
-    {
+    public WindSpeed getAverageWindSpeed() {
+        return getFieldValueAsWindSpeed(AVERAGE_WIND_SPEED_KNOTS);
+    }
+
+    public WindSpeed getGustSpeed() {
         return getFieldValueAsWindSpeed(GUST_SPEED_KNOTS);
     }
-    
-    public WindDirection getWindDirection()
-    {   
+
+    public WindDirection getWindDirection() {
         return getFieldValueAsWindDirection(WIND_DIRECTION_COMPASS_DEGREES);
-    }    
-    
-    public Temperature getOutdoorTemperature()
-    {
+    }
+
+    public Temperature getOutdoorTemperature() {
         return getFieldValueAsTemperature(OUTDOOR_TEMPERATURE_CELSIUS);
     }
 
-    public Integer getOutdoorHumidityPercentage()
-    {
+    public Integer getOutdoorHumidityPercentage() {
         return getFieldValueAsInteger(OUTDOOR_HUMIDITY_PERCENTAGE);
     }
 
-    public Pressure getSurfacePressure()
-    {
+    public Pressure getSurfacePressure() {
         return getFieldValueAsPressure(SURFACE_PRESSURE_HECTOPASCALS);
     }
-    
-    public Rainfall getDailyRainfall()
-    {
-        return getFieldValueAsRainfall(DAILY_RAINFALL_MILLIMETRES);
-    }    
 
-    public Rainfall getRainfallRatePerMinute()
-    {
+    public Rainfall getDailyRainfall() {
+        return getFieldValueAsRainfall(DAILY_RAINFALL_MILLIMETRES);
+    }
+
+    public Rainfall getRainfallRatePerMinute() {
         return getFieldValueAsRainfall(RAINFALL_RATE_MILLIMETRES_PER_MINUTE);
     }
-    
-    public Temperature getIndoorTemperature()
-    {
+
+    public Temperature getIndoorTemperature() {
         return getFieldValueAsTemperature(INDOOR_TEMPERATURE_CELSIUS);
     }
 
-    public Integer getIndoorHumidityPercentage()
-    {
+    public Integer getIndoorHumidityPercentage() {
         return getFieldValueAsInteger(INDOOR_HUMIDITY_PERCENTAGE);
     }
-    
-    public Conditions getForecast()
-    {
+
+    public Conditions getForecast() {
         Conditions forecast = null;
-        
+
         Integer forecastIcon = getFieldValueAsInteger(FORECAST);
-        
-        if (forecastIcon != null)
-        {
+
+        if (forecastIcon != null) {
             forecast = Conditions.resolveIcon(forecastIcon);
         }
-        
+
         return forecast;
     }
-    
-    public Integer getHour()
-    {
+
+    public Integer getHour() {
         return getFieldValueAsInteger(HOUR);
     }
 
-    public Integer getMinute()
-    {
+    public Integer getMinute() {
         return getFieldValueAsInteger(MINUTE);
     }
 
-    public Integer getSeconds()
-    {
+    public Integer getSeconds() {
         return getFieldValueAsInteger(SECONDS);
-    }    
-    
-    public String getStationName()
-    {
+    }
+
+    public String getStationName() {
         String stationName = getFieldValueAsString(STATION_NAME);
-        
-        if (stationName != null)
-        {
-            if (stationName.equals("-"))
-            {
+
+        if (stationName != null) {
+            if (stationName.equals("-")) {
                 stationName = null;
-            }
-            else
-            {
+            } else {
                 stationName = removeTrailingTime(stationName);
                 stationName = sanitizeString(stationName);
             }
         }
-        
+
         return stationName;
     }
-    
-    public Integer getSolarPercentage()
-    {
+
+    public Integer getSolarPercentage() {
         return getFieldValueAsInteger(SOLAR_PERCENTAGE);
     }
-    
-    public Integer getDay()
-    {
+
+    public Integer getDay() {
         return getFieldValueAsInteger(DAY);
     }
 
-    public Integer getMonth()
-    {
+    public Integer getMonth() {
         return getFieldValueAsInteger(MONTH);
     }
-    
-    public Temperature getWindChill()
-    {
+
+    public Temperature getWindChill() {
         return getFieldValueAsTemperature(WIND_CHILL_CELSIUS);
     }
-    
-    public Temperature getHumidex()
-    {
+
+    public Temperature getHumidex() {
         return getFieldValueAsTemperature(HUMIDEX_CELSIUS);
-    }   
-    
-    public Temperature getDailyMaxOutdoorTemperature()
-    {
+    }
+
+    public Temperature getDailyMaxOutdoorTemperature() {
         return getFieldValueAsTemperature(DAILY_MAX_OUTDOOR_TEMPERATURE_CELSIUS);
     }
 
-    public Temperature getDailyMinOutdoorTemperature()
-    {
+    public Temperature getDailyMinOutdoorTemperature() {
         return getFieldValueAsTemperature(DAILY_MIN_OUTDOOR_TEMPERATURE_CELSIUS);
-    }    
-    
-    public String getCurrentConditionsDescription()
-    {
+    }
+
+    public String getCurrentConditionsDescription() {
         String currentConditions = getFieldValueAsString(CURRENT_CONDITIONS_DESCRIPTION);
-        
-        if (currentConditions != null)
-        {
+
+        if (currentConditions != null) {
             currentConditions = sanitizeString(currentConditions);
         }
-        
-        return currentConditions;        
-    }        
-    
-    public Trend getSurfacePressureTrend()
-    {
+
+        return currentConditions;
+    }
+
+    public Trend getSurfacePressureTrend() {
         return getFieldValueAsTrend(SURFACE_PRESSURE_TREND);
-    }    
-    
-    public Temperature getDewPoint()
-    {
+    }
+
+    public Temperature getDewPoint() {
         return getFieldValueAsTemperature(DEW_POINT_CELSIUS);
     }
-    
-    public BigDecimal getUvIndex()
-    {
+
+    public BigDecimal getUvIndex() {
         return getFieldValueAsBigDecimal(UV_INDEX);
     }
-    
-    public Temperature getHeatIndex()
-    {
+
+    public Temperature getHeatIndex() {
         return getFieldValueAsTemperature(HEAT_INDEX_CELSIUS);
     }
-    
-    public Temperature getApparentTemperature()
-    {
+
+    public Temperature getApparentTemperature() {
         return getFieldValueAsTemperature(APPARENT_TEMPERATURE_CELSIUS);
     }
-    
-    public BigDecimal getSolarRadiation()
-    {
+
+    public BigDecimal getSolarRadiation() {
         return getFieldValueAsBigDecimal(SOLAR_RADIATION_WATTS_PER_METRE_SQUARED);
     }
-    
-    public Integer getYear()
-    {
+
+    public Integer getYear() {
         return getFieldValueAsInteger(YEAR);
     }
-    
-    public Trend getOutdoorTemperatureTrend()
-    {    
+
+    public Trend getOutdoorTemperatureTrend() {
         return getFieldValueAsTrend(OUTDOOR_TEMPERATURE_TREND);
     }
-    
-    public Trend getOutdoorHumidityTrend()
-    {
+
+    public Trend getOutdoorHumidityTrend() {
         return getFieldValueAsTrend(OUTDOOR_HUMIDITY_TREND);
     }
-    
-    public BigDecimal getLatitudeDecimalDegrees()
-    {
+
+    public BigDecimal getLatitudeDecimalDegrees() {
         return getFieldValueAsBigDecimal(LATITUDE_DECIMAL_DEGREES);
     }
 
-    public BigDecimal getLongitudeDecimalDegrees()
-    {
+    public BigDecimal getLongitudeDecimalDegrees() {
         return getFieldValueAsBigDecimal(LONGITUDE_DECIMAL_DEGREES);
     }
-    
-    private String sanitizeString(String value)
-    {
+
+    private String sanitizeString(String value) {
         value = replaceUnderscoresWithSpaces(value);
         value = value.trim();
         value = minimizeSpaces(value);
-        
-        if (value.length() == 0)
-        {
+
+        if (value.length() == 0) {
             value = null;
         }
-        
+
         return value;
     }
-    
-    private String minimizeSpaces(String stationName)
-    {
+
+    private String minimizeSpaces(String stationName) {
         stationName = stationName.replaceAll(" +", " ");
         return stationName;
     }
-    
-    private String replaceUnderscoresWithSpaces(String value)
-    {
+
+    private String replaceUnderscoresWithSpaces(String value) {
         return value.replaceAll("_", " ");
     }
-    
-    private String removeTrailingTime(String value)
-    {
+
+    private String removeTrailingTime(String value) {
         // e.g. -hh:mm:ss
         int i = value.lastIndexOf("-");
-        
-        if (i != -1)
-        {
+
+        if (i != -1) {
             value = value.substring(0, i);
         }
-        
+
         return value;
     }
-    
-    private WindSpeed getFieldValueAsWindSpeed(int fieldPosition)
-    {
+
+    private WindSpeed getFieldValueAsWindSpeed(int fieldPosition) {
         WindSpeed value = null;
-        
+
         BigDecimal valueKnots = getFieldValueAsBigDecimal(fieldPosition);
-        
-        if (valueKnots != null)
-        {
+
+        if (valueKnots != null) {
             value = new WindSpeed(valueKnots);
         }
-        
+
         return value;
     }
-    
-    private WindDirection getFieldValueAsWindDirection(int fieldPosition)
-    {
+
+    private WindDirection getFieldValueAsWindDirection(int fieldPosition) {
         WindDirection value = null;
-        
+
         Integer valueCompassDegrees = getFieldValueAsInteger(fieldPosition);
-        
-        if (valueCompassDegrees != null)
-        {
+
+        if (valueCompassDegrees != null) {
             value = new WindDirection(valueCompassDegrees);
         }
-        
+
         return value;
     }
-    
-    private Temperature getFieldValueAsTemperature(int fieldPosition)
-    {
+
+    private Temperature getFieldValueAsTemperature(int fieldPosition) {
         Temperature value = null;
-        
+
         BigDecimal valueCelsius = getFieldValueAsBigDecimal(fieldPosition);
-        
-        if (valueCelsius != null)
-        {
+
+        if (valueCelsius != null) {
             value = new Temperature(valueCelsius);
         }
-        
+
         return value;
     }
-    
-    private Pressure getFieldValueAsPressure(int fieldPosition)
-    {
+
+    private Pressure getFieldValueAsPressure(int fieldPosition) {
         Pressure value = null;
-        
+
         BigDecimal valueHectopascals = getFieldValueAsBigDecimal(fieldPosition);
-        
-        if (valueHectopascals != null)
-        {
+
+        if (valueHectopascals != null) {
             value = new Pressure(valueHectopascals);
         }
-        
+
         return value;
     }
-    
-    private Rainfall getFieldValueAsRainfall(int fieldPosition)
-    {
+
+    private Rainfall getFieldValueAsRainfall(int fieldPosition) {
         Rainfall value = null;
-        
+
         BigDecimal valueMillimetres = getFieldValueAsBigDecimal(fieldPosition);
-        
-        if (valueMillimetres != null)
-        {
+
+        if (valueMillimetres != null) {
             value = new Rainfall(valueMillimetres);
         }
-        
+
         return value;
     }
-    
-    private Integer getFieldValueAsInteger(int fieldPosition)
-    {
+
+    private Integer getFieldValueAsInteger(int fieldPosition) {
         Integer value = null;
-        
-        if (fields.length-1 >= fieldPosition)
-        {
-            try
-            {
+
+        if (fields.length - 1 >= fieldPosition) {
+            try {
                 value = Integer.parseInt(fields[fieldPosition]);
-            }
-            catch (NumberFormatException ex)
-            {
+            } catch (NumberFormatException ex) {
                 value = null;
             }
         }
-        
+
         return value;
     }
-    
-    private BigDecimal getFieldValueAsBigDecimal(int fieldPosition)
-    {
+
+    private BigDecimal getFieldValueAsBigDecimal(int fieldPosition) {
         BigDecimal value = null;
-        
-        if (fields.length-1 >= fieldPosition)
-        {
-            try
-            {
+
+        if (fields.length - 1 >= fieldPosition) {
+            try {
                 value = new BigDecimal(fields[fieldPosition]);
-            }
-            catch (NumberFormatException ex)
-            {
+            } catch (NumberFormatException ex) {
                 value = null;
             }
         }
-        
+
         return value;
     }
-    
-    private String getFieldValueAsString(int fieldPosition)
-    {
+
+    private String getFieldValueAsString(int fieldPosition) {
         String value = null;
-        
-        if (fields.length-1 >= fieldPosition)
-        {
+
+        if (fields.length - 1 >= fieldPosition) {
             value = fields[fieldPosition];
-            
-            if (value.equals("-"))
-            {
+
+            if (value.equals("-")) {
                 value = null;
-            }            
+            }
         }
-        
+
         return value;
     }
-    
-    private Trend getFieldValueAsTrend(int fieldPosition)
-    {
+
+    private Trend getFieldValueAsTrend(int fieldPosition) {
         Trend value = null;
-        
+
         BigDecimal bigDecimalValue = getFieldValueAsBigDecimal(fieldPosition);
-        
-        if (bigDecimalValue != null)
-        {
-            if (bigDecimalValue.compareTo(BigDecimal.valueOf(0)) > 0)
-            {
+
+        if (bigDecimalValue != null) {
+            if (bigDecimalValue.compareTo(BigDecimal.valueOf(0)) > 0) {
                 value = Trend.RISING;
-            }
-            else if (bigDecimalValue.compareTo(BigDecimal.valueOf(0)) < 0)
-            {
+            } else if (bigDecimalValue.compareTo(BigDecimal.valueOf(0)) < 0) {
                 value = Trend.FALLING;
-            }
-            else
-            {
+            } else {
                 value = Trend.STEADY;
             }
         }
-        
+
         return value;
     }
 }
